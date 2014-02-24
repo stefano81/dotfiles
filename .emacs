@@ -133,7 +133,8 @@
 
 
 ;;; git
-(require 'vc-git)
+;;(require 'vc-git)
+(require 'magit)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
