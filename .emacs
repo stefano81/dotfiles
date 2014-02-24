@@ -20,34 +20,33 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 
-;;; autocomplite
+;;; autocomplete
+(require 'auto-complete)
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
+(require 'auto-complete-c-headers)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict/")
+(setq ac-sources '(ac-source-filename
+		   ac-source-functions
+		   ac-source-yasnippet
+		   ac-source-symbols
+		   ac-source-words-in-same-mode-buffers
+		   ac-source-dictionary))
+(add-to-list 'ac-sources 'ac-source-c-headers)
 
+(ac-config-default)
+(setq ac-use-fuzzy t)
+(ac-set-trigger-key "TAB")
+(setq ac-auto-start 3)
+(setq ac-auto-show-menu 3)
 
 ;;; js
 (require 'js3-mode)
 (add-hook 'js2-mode-hook (lambda()
+			   (ac-js2-mode)
+			   (show-paren-mode t)
 			   (js3-auto-indent-p t)
 			   (js3-enter-indents-newline t)
 			   (js3-indent-on-enter-key t)))
-;;(require 'js2-mode)
-;;(add-hook 'js2-mode-hook (lambda()
-;; 			  (yas/minor-mode-on)
-;; 			  (shop-paren-mode)
-;; 			  ))
-;; (add-hook 'js2-post-parse-callbacks
-;; 	  (lambda()
-;; 	    (when (> (buffer-size) 0)
-;; 	      (let ((btext (replace-regexp-in-string
-;; 			    ": *true" " "
-;; 			    (replace-regexp-in-string "[\n\t ]+" " " (buffer-substring-no-properties 1 (buffer-size)) t t))))
-;; 		(mapc (apply-partially 'add-to-list 'js2-additional-externs)
-;; 		      (split-string)
-;; 		      (if (string-match "/\\" "global *\\(.*?\\) *\\*/" btext) (match-string-no-properties 1 btext) "")
-;; 		      " *, *" t))
-;; 	      )))
 
 ;;; force c++-mode
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
@@ -133,6 +132,8 @@
 			 'whitespace-cleanup nill t))))
 
 
+;;; git
+(require 'vc-git)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
