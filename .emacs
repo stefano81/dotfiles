@@ -39,7 +39,7 @@
 (setq ac-auto-start 3)
 (setq ac-auto-show-menu 3)
 
-;;; js
+;;; javascript
 (require 'js3-mode)
 (add-hook 'js2-mode-hook (lambda()
 			   (ac-js2-mode)
@@ -47,6 +47,10 @@
 			   (js3-auto-indent-p t)
 			   (js3-enter-indents-newline t)
 			   (js3-indent-on-enter-key t)))
+
+;;; JSON
+(require 'flymake-json)
+(add-hook 'json-mode 'flymake-json-load)
 
 ;;; force c++-mode
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
@@ -108,6 +112,7 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-PDF-mode t)
+(require 'auto-complete-auctex)
 
 ;;; CEDET
 (require 'cedet)
@@ -134,7 +139,10 @@
 
 ;;; git
 ;;(require 'vc-git)
-(require 'magit)
+;;(require 'magit)
+
+(global-linum-mode 1)
+;(setq width (max width (+ (length str) 1)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
