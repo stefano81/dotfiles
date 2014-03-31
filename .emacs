@@ -44,9 +44,11 @@
 (add-hook 'js2-mode-hook (lambda()
 			   (ac-js2-mode)
 			   (show-paren-mode t)
+			   (auto-complete-mode t)
 			   (js3-auto-indent-p t)
 			   (js3-enter-indents-newline t)
-			   (js3-indent-on-enter-key t)))
+			   (js3-indent-on-enter-key t)
+			   (flymake-jslint-load)))
 
 ;;; JSON
 (require 'flymake-json)
