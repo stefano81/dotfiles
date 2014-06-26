@@ -30,29 +30,37 @@
 		   ac-source-yasnippet
 		   ac-source-symbols
 		   ac-source-words-in-same-mode-buffers
-		   ac-source-dictionary))
-(add-to-list 'ac-sources 'ac-source-c-headers)
+		   ac-source-dictionary
+		   ac-source-c-headers))
+;;(add-to-list 'ac-sources 'ac-source-c-headers)
 
 (ac-config-default)
 (setq ac-use-fuzzy t)
-(ac-set-trigger-key "TAB")
+;;(ac-set-trigger-key "TAB")
 (setq ac-auto-start 3)
 (setq ac-auto-show-menu 3)
+;(require 'flymake-jslint)
 
 ;;; javascript
-(require 'js3-mode)
-(add-hook 'js2-mode-hook (lambda()
-			   (ac-js2-mode)
-			   (show-paren-mode t)
-			   (auto-complete-mode t)
-			   (js3-auto-indent-p t)
-			   (js3-enter-indents-newline t)
-			   (js3-indent-on-enter-key t)
-			   (flymake-jslint-load)))
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;;(autoload 'js2-mode)
+;;(add-hook 'js2-mode-hook (lambda()
+;;			   (ac-js2-mode)
+;; 			   (show-paren-mode t)
+;; 			   (auto-complete-mode t)
+;; 			   (js2-auto-indent-p t)
+;; 			   (js2-enter-indents-newline t)
+;; 			   (js2-indent-on-enter-key t)
+;; 			   (setq js2-basic-offset 2)
+;; 			   (flymake-jslint-load)
+;; 			   ))
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
 
 ;;; JSON
-(require 'flymake-json)
-(add-hook 'json-mode 'flymake-json-load)
+;;(require 'flymake-json)
+;;(add-hook 'json-mode 'flymake-json-load)
 
 ;;; force c++-mode
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
