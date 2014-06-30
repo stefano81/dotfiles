@@ -1,0 +1,9 @@
+BasedOnStyle: LLVM
+IndentWidth: 3
+UseTab: Always
+BreakBeforeBraces: Attach
+AllowShortIfStatementsOnASingleLine: false
+IndentCaseLabels: false
+Cpp11BracedListStyle: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false

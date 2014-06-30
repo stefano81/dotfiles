@@ -6,14 +6,14 @@
   (require 'package)
   (package-initialize)
   (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			  ("marlalade" . "http://marmalade-repo.org/packages/")
-			("melpa" . "http://melpa.milkbox.net/packages/")))
+			   ("marlalade" . "http://marmalade-repo.org/packages/")
+			   ("melpa" . "http://melpa.milkbox.net/packages/")))
   )
 
 ;;; autopair
 (require 'autopair)
 (autopair-global-mode) ;; to enable in all buffers
-;;(setq autopair-autowrap t)
+(setq autopair-autowrap t)
 
 ;;; yasnippet
 ;;; should be loaded before auto complete so that they can work together
@@ -23,18 +23,19 @@
 ;;; autocomplete
 (require 'auto-complete)
 (require 'auto-complete-config)
-(require 'auto-complete-c-headers)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict/")
-(setq ac-sources '(ac-source-filename
-		   ac-source-functions
-		   ac-source-yasnippet
-		   ac-source-symbols
-		   ac-source-words-in-same-mode-buffers
-		   ac-source-dictionary
-		   ac-source-c-headers))
+(ac-config-default)
+
+;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict/")
+;; (setq ac-sources '(ac-source-filename
+;; 		   ac-source-functions
+;; 		   ac-source-yasnippet
+;; 		   ac-source-symbols
+;; 		   ac-source-words-in-same-mode-buffers
+;; 		   ac-source-dictionary
+;; 		   ac-source-c-headers))
 ;;(add-to-list 'ac-sources 'ac-source-c-headers)
 
-(ac-config-default)
+
 (setq ac-use-fuzzy t)
 ;;(ac-set-trigger-key "TAB")
 (setq ac-auto-start 3)
@@ -67,6 +68,14 @@
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
+;;; Clang-format
+(load "/usr/share/emacs/site-lisp/clang-format-3.5/clang-format.el")
+(global-set-key [C-tab] 'clang-format-buffer)
+
+
+;;; ECB
+;;()
+
 ;; (c-add-style "my-style"
 ;; 	     '(;;"stroustrup"
 ;; 	       "stroustrup"
@@ -88,6 +97,8 @@
 ;;; c++11 mode
 (defun my-c++-mode-hook()
   ;;(c-set-style "my-style")
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
   (show-paren-mode)
   (setq c-basic-offset 4)
   (setq indent-tabs-mode nil)
@@ -126,9 +137,12 @@
 
 ;;; CEDET
 (require 'cedet)
+(global-ede-mode 1)
 (semantic-mode 1)
 ;(global-semantic-idle-completions-mode t)
 (global-semantic-decoration-mode nil)
+;(semantic-load-enable-minimum-features)
+;(semantic-load-enable-code-helpers)
 
 ;;; ssh config
 (autoload 'ssh-config-mode "ssh-config-mode" t)
