@@ -1,0 +1,10 @@
+[user]
+	name = Stefano Braghin
+	email = stefano.braghin+git@gmail.com
+[color]
+	branch = auto
+	diff = auto
+	status = auto
+	showbranch = auto
+[core]
+	excludesfile = /home/stefanob/.gitignore

@@ -1,0 +1,13 @@
+# emacs' backup files and sessions' file
+*~
+\#*\#
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# C/C++ object files
+*.o
+
