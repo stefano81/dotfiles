@@ -8,3 +8,5 @@
 	showbranch = auto
 [core]
 	excludesfile = /home/stefanob/.gitignore
+[push]
+        default = matching
