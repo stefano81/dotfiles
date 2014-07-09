@@ -72,6 +72,9 @@
 (load "/usr/share/emacs/site-lisp/clang-format-3.5/clang-format.el")
 (global-set-key [C-tab] 'clang-format-buffer)
 
+;;; Python
+(add-hook 'python-mode-hook 'jedi:setup)
+
 
 ;;; ECB
 ;;()
@@ -136,11 +139,11 @@
 (require 'auto-complete-auctex)
 
 ;;; CEDET
-(require 'cedet)
-(global-ede-mode 1)
-(semantic-mode 1)
+;(require 'cedet)
+;(global-ede-mode 1)
+;(semantic-mode 1)
 ;(global-semantic-idle-completions-mode t)
-(global-semantic-decoration-mode nil)
+;(global-semantic-decoration-mode nil)
 ;(semantic-load-enable-minimum-features)
 ;(semantic-load-enable-code-helpers)
 
@@ -165,7 +168,7 @@
 ;;(require 'vc-git)
 ;;(require 'magit)
 
-(global-linum-mode 1)
+;(global-linum-mode 1)
 ;(setq width (max width (+ (length str) 1)))
 
 (custom-set-variables
