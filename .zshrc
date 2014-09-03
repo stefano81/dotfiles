@@ -7,7 +7,7 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="fox"
-ZSH_THEME="cypher"
+ZSH_THEME="kphoen"
 #ZSH_THEME="random"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -53,7 +53,7 @@ plugins=(git mvn npm)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH="/home/stefanob/bin:/home/stefanob/v0.10.29/bin:/home/stefanob/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/stefanob/adt-bundle-linux-x86_64-20131030/sdk/platform-tools:/home/stefanob/adt-bundle-linux-x86_64-20131030/sdk/tools:/opt/ibm/jazz-4.0.3/scmtools/eclipse:/home/stefanob/Utilities/apache-tomcat/bin:/home/stefanob/v0.10.29/bin:/home/stefanob/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/stefanob/adt-bundle-linux-x86_64-20131030/sdk/platform-tools:/home/stefanob/adt-bundle-linux-x86_64-20131030/sdk/tools:/opt/ibm/jazz-4.0.3/scmtools/eclipse:/home/stefanob/Utilities/apache-tomcat/bin:/home/stefanob/Utilities/mongodb/bin:/home/stefanob/Utilities/redis"
+export PATH="/home/stefanob/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/stefanob/adt-bundle-linux-x86_64-20131030/sdk/platform-tools:/home/stefanob/adt-bundle-linux-x86_64-20131030/sdk/tools:/opt/ibm/jazz-4.0.3/scmtools/eclipse:/usr/local/games:/home/stefanob/Utilities/mongodb/bin:/home/stefanob/Utilities/redis"
 export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -83,3 +83,6 @@ export ARCHFLAGS="-arch x86_64"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+# nvm
+source ~/.nvm/nvm.sh
