@@ -53,7 +53,14 @@ plugins=(git mvn npm)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH="/home/stefanob/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/stefanob/adt-bundle-linux-x86_64-20131030/sdk/platform-tools:/home/stefanob/adt-bundle-linux-x86_64-20131030/sdk/tools:/opt/ibm/jazz-4.0.3/scmtools/eclipse:/usr/local/games:/home/stefanob/Utilities/mongodb/bin:/home/stefanob/Utilities/redis"
+PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
+PATH="$PATH:$HOME/adt-bundle-linux-x86_64-20131030/sdk/platform-tools"
+PATH="$PATH:/home/stefanob/adt-bundle-linux-x86_64-20131030/sdk/tools"
+PATH="$PATH:/opt/ibm/jazz-4.0.3/scmtools/eclipse"
+PATH="$PATH:$HOME/Utilities/mongodb/bin"
+PATH="$PATH:$HOME/Utilities/redis"
+export PATH
+
 export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -85,4 +92,10 @@ export ARCHFLAGS="-arch x86_64"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 # nvm
-source ~/.nvm/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#source ~/.nvm/nvm.sh
+
+# macports
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+
