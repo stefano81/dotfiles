@@ -24,6 +24,14 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
+(defun my:ac-c-headers()
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
+  (add-to-list 'achead:include-directories '"")
+)
+
+(add-hook 'c++-mode-hook 'my:ac-c-headers)
+(add-hook 'c-mode-hook 'my:ac-c-headers)
 
 ;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict/")
 ;; (setq ac-sources '(ac-source-filename
@@ -36,10 +44,10 @@
 ;;(add-to-list 'ac-sources 'ac-source-c-headers)
 
 
-(setq ac-use-fuzzy t)
+;(setq ac-use-fuzzy t)
 ;;(ac-set-trigger-key "TAB")
-(setq ac-auto-start 3)
-(setq ac-auto-show-menu 3)
+;(setq ac-auto-start 3)
+;(setq ac-auto-show-menu 3)
 ;(require 'flymake-jslint)
 
 ;;; javascript
@@ -64,18 +72,64 @@
 ;;(add-hook 'json-mode 'flymake-json-load)
 
 ;;; force c++-mode
-(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+;; (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
+;; (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
+;; (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-;;; Clang-format
-(load "/usr/share/emacs/site-lisp/clang-format-3.5/clang-format.el")
-(global-set-key [C-tab] 'clang-format-buffer)
+;; ;;; Clang-format
+;; (load "/usr/share/emacs/site-lisp/clang-format-3.4/clang-format.el")
+;; (global-set-key [C-tab] 'clang-format-buffer)
+
+;; (load "/usr/share/emacs/site-lisp/clang-format-3.4/clang-format.el")
+;; (global-set-key [C-tab] 'clang-format-buffer)
+
+;; (add-hook 'c++-mode-hook 'irony-mode)
+;; (add-hook 'c-mode-hook 'irony-mode)
+;; ;;(add-hook 'objc-mode-hook 'irony-mode) ;; not using Objective-C.. for now
+
+;; ;; replace the `completion-at-point' and `complete-symbol' bindings in
+;; ;; irony-mode's buffers by irony-mode's function
+;; (defun my-irony-mode-hook ()
+;;   (define-key irony-mode-map [remap completion-at-point]
+;;     'irony-completion-at-point-async)
+;;   (define-key irony-mode-map [remap complete-symbol]
+;;     'irony-completion-at-point-async))
+;; (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+
+;; ;;; c++11 mode
+;; (defun my-c++-mode-hook()
+;;   ;;(c-set-style "my-style")
+;; ;  (require 'auto-complete-c-headers)
+;;   (add-to-list 'ac-sources 'ac-source-c-headers)
+;;   (show-paren-mode)
+;;   (setq c-basic-offset 4)
+;;   (setq indent-tabs-mode nil)
+;;   (auto-fill-mode)
+;;   (font-lock-add-keywords
+;;    nil '(;; complete some fundamental keywords
+;; 	 ("\\<\\(void\\|unsigned\\|signed\\|char\\|short\\|bool\\|int\\|long\\|float\\|double\\)\\>" . font-lock-keyword-face)
+;; 	 ;; add the new C++11 keywords
+;; 	 ("\\<\\(alignof\\|alignas\\|constexpr\\|decltype\\|noexcept\\|nullptr\\|static_assert\\|thread_local\\|override\\|final\\)\\>" . font-lock-keyword-face)
+;; 	 ("\\<\\(char[0-9]+_t\\)\\>" . font-lock-keyword-face)
+;; 	 ;; PREPROCESSOR_CONSTANT
+;; 	 ("\\<[A-Z]+[A-Z_]+\\>" . font-lock-constant-face)
+;; 		    ;; hexadecimal numbers
+;; 	 ("\\<0[xX][0-9A-Fa-f]+\\>" . font-lock-constant-face)
+;; 	 ;; integer/float/scientific numbers
+;; 	 ("\\<[\\-+]*[0-9]*\\.?[0-9]+\\([ulUL]+\\|[eE][\\-+]?[0-9]+\\)?\\>" . font-lock-constant-face)
+;; 	 ;; user-types (customize!)
+;; 	 ("\\<[A-Za-z_]+[A-Za-z_0-9]*_\\(t\\|type\\|ptr\\)\\>" . font-lock-type-face)
+;; 	 ("\\<\\(xstring\\|xchar\\)\\>" . font-lock-type-face)
+;; 	 )
+;;    )
+;;   ;;(c-toggle-auto-hungry-state 1)
+;; )
+
+;; (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
 ;;; Python
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
-
 
 ;;; ECB
 ;;()
@@ -97,37 +151,6 @@
 ;; 	       ;; 			  (brace-list-open . 1)
 ;; 	       ;; 			  (statement-case-open . +)))))
 ;; 	       ))
-
-;;; c++11 mode
-(defun my-c++-mode-hook()
-  ;;(c-set-style "my-style")
-  (require 'auto-complete-c-headers)
-  (add-to-list 'ac-sources 'ac-source-c-headers)
-  (show-paren-mode)
-  (setq c-basic-offset 4)
-  (setq indent-tabs-mode nil)
-  (auto-fill-mode)
-  (font-lock-add-keywords
-   nil '(;; complete some fundamental keywords
-	 ("\\<\\(void\\|unsigned\\|signed\\|char\\|short\\|bool\\|int\\|long\\|float\\|double\\)\\>" . font-lock-keyword-face)
-	 ;; add the new C++11 keywords
-	 ("\\<\\(alignof\\|alignas\\|constexpr\\|decltype\\|noexcept\\|nullptr\\|static_assert\\|thread_local\\|override\\|final\\)\\>" . font-lock-keyword-face)
-	 ("\\<\\(char[0-9]+_t\\)\\>" . font-lock-keyword-face)
-	 ;; PREPROCESSOR_CONSTANT
-	 ("\\<[A-Z]+[A-Z_]+\\>" . font-lock-constant-face)
-		    ;; hexadecimal numbers
-	 ("\\<0[xX][0-9A-Fa-f]+\\>" . font-lock-constant-face)
-	 ;; integer/float/scientific numbers
-	 ("\\<[\\-+]*[0-9]*\\.?[0-9]+\\([ulUL]+\\|[eE][\\-+]?[0-9]+\\)?\\>" . font-lock-constant-face)
-	 ;; user-types (customize!)
-	 ("\\<[A-Za-z_]+[A-Za-z_0-9]*_\\(t\\|type\\|ptr\\)\\>" . font-lock-type-face)
-	 ("\\<\\(xstring\\|xchar\\)\\>" . font-lock-type-face)
-	 )
-   )
-  ;;(c-toggle-auto-hungry-state 1)
-)
-
-(add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
 ;;; AUCTeX
 ;;(require 'auctex)
