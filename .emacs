@@ -3,9 +3,9 @@
 
 ;;; to avoid issues under OS X
 (when (eq system-type 'darwin) ;; mac specific settings
-;  (setq mac-option-modifier 'alt)
-;  (setq mac-command-modifier 'meta)
-;  (global-set-key [kp-delete] 'delete-char) ;; sets fn-delete to be right-delete
+  (setq mac-option-modifier 'alt)
+  (setq mac-command-modifier 'meta)
+  (global-set-key [kp-delete] 'delete-char) ;; sets fn-delete to be right-delete
   )
 
 ;;; package manager
