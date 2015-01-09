@@ -90,24 +90,21 @@
 
 ;;; javascript
 (require 'js2-mode)
+(add-hook 'js2-mode-hook (lambda()
+			   (ac-js2-mode)
+ 			   (show-paren-mode t)
+ 			   (auto-complete-mode t)
+ 			   (js2-auto-indent-p t)
+ 			   (js2-enter-indents-newline t)
+ 			   (js2-indent-on-enter-key t)
+ 			   (setq js2-basic-offset 2)
+ 			   (flymake-jslint-load)
+ 			   ))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-;;(autoload 'js2-mode)
-;;(add-hook 'js2-mode-hook (lambda()
-;;			   (ac-js2-mode)
-;; 			   (show-paren-mode t)
-;; 			   (auto-complete-mode t)
-;; 			   (js2-auto-indent-p t)
-;; 			   (js2-enter-indents-newline t)
-;; 			   (js2-indent-on-enter-key t)
-;; 			   (setq js2-basic-offset 2)
-;; 			   (flymake-jslint-load)
-;; 			   ))
-;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
 
 ;;; JSON
-;;(require 'flymake-json)
-;;(add-hook 'json-mode 'flymake-json-load)
+(require 'flymake-json)
+(add-hook 'json-mode 'flymake-json-load)
 
 ;;; force c++-mode
 ;; (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
@@ -134,36 +131,36 @@
 ;;     'irony-completion-at-point-async))
 ;; (add-hook 'irony-mode-hook 'my-irony-mode-hook)
 
-;; ;;; c++11 mode
-;; (defun my-c++-mode-hook()
-;;   ;;(c-set-style "my-style")
-;; ;  (require 'auto-complete-c-headers)
-;;   (add-to-list 'ac-sources 'ac-source-c-headers)
-;;   (show-paren-mode)
-;;   (setq c-basic-offset 4)
-;;   (setq indent-tabs-mode nil)
-;;   (auto-fill-mode)
-;;   (font-lock-add-keywords
-;;    nil '(;; complete some fundamental keywords
-;; 	 ("\\<\\(void\\|unsigned\\|signed\\|char\\|short\\|bool\\|int\\|long\\|float\\|double\\)\\>" . font-lock-keyword-face)
-;; 	 ;; add the new C++11 keywords
-;; 	 ("\\<\\(alignof\\|alignas\\|constexpr\\|decltype\\|noexcept\\|nullptr\\|static_assert\\|thread_local\\|override\\|final\\)\\>" . font-lock-keyword-face)
-;; 	 ("\\<\\(char[0-9]+_t\\)\\>" . font-lock-keyword-face)
-;; 	 ;; PREPROCESSOR_CONSTANT
-;; 	 ("\\<[A-Z]+[A-Z_]+\\>" . font-lock-constant-face)
-;; 		    ;; hexadecimal numbers
-;; 	 ("\\<0[xX][0-9A-Fa-f]+\\>" . font-lock-constant-face)
-;; 	 ;; integer/float/scientific numbers
-;; 	 ("\\<[\\-+]*[0-9]*\\.?[0-9]+\\([ulUL]+\\|[eE][\\-+]?[0-9]+\\)?\\>" . font-lock-constant-face)
-;; 	 ;; user-types (customize!)
-;; 	 ("\\<[A-Za-z_]+[A-Za-z_0-9]*_\\(t\\|type\\|ptr\\)\\>" . font-lock-type-face)
-;; 	 ("\\<\\(xstring\\|xchar\\)\\>" . font-lock-type-face)
-;; 	 )
-;;    )
-;;   ;;(c-toggle-auto-hungry-state 1)
-;; )
+;;; c++11 mode
+(defun my-c++-mode-hook()
+  ;;(c-set-style "my-style")
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
+   (show-paren-mode)
+   (setq c-basic-offset 4)
+   (setq indent-tabs-mode nil)
+   (auto-fill-mode)
+   (font-lock-add-keywords
+    nil '(;; complete some fundamental keywords
+ 	 ("\\<\\(void\\|unsigned\\|signed\\|char\\|short\\|bool\\|int\\|long\\|float\\|double\\)\\>" . font-lock-keyword-face)
+ 	 ;; add the new C++11 keywords
+ 	 ("\\<\\(alignof\\|alignas\\|constexpr\\|decltype\\|noexcept\\|nullptr\\|static_assert\\|thread_local\\|override\\|final\\)\\>" . font-lock-keyword-face)
+ 	 ("\\<\\(char[0-9]+_t\\)\\>" . font-lock-keyword-face)
+ 	 ;; PREPROCESSOR_CONSTANT
+	 ("\\<[A-Z]+[A-Z_]+\\>" . font-lock-constant-face)
+ 		    ;; hexadecimal numbers
+ 	 ("\\<0[xX][0-9A-Fa-f]+\\>" . font-lock-constant-face)
+ 	 ;; integer/float/scientific numbers
+ 	 ("\\<[\\-+]*[0-9]*\\.?[0-9]+\\([ulUL]+\\|[eE][\\-+]?[0-9]+\\)?\\>" . font-lock-constant-face)
+ 	 ;; user-types (customize!)
+ 	 ("\\<[A-Za-z_]+[A-Za-z_0-9]*_\\(t\\|type\\|ptr\\)\\>" . font-lock-type-face)
+ 	 ("\\<\\(xstring\\|xchar\\)\\>" . font-lock-type-face)
+ 	 )
+    )
+   ;;(c-toggle-auto-hungry-state 1)
+   )
 
-;; (add-hook 'c++-mode-hook 'my-c++-mode-hook)
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
 ;;; Python
 (add-hook 'python-mode-hook 'jedi:setup)
@@ -216,14 +213,8 @@
 	       (add-hook 'before-save-hook
 			 'whitespace-cleanup nill t))))
 
-
-;;; git
-;;(require 'vc-git)
-;;(require 'magit)
-
 ;;; ESS
 (require 'ess-site)
-
 
 ;(setq width (max width (+ (length str) 1)))
 
