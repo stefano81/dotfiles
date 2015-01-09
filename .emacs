@@ -17,6 +17,21 @@
 			   ("melpa" . "http://melpa.milkbox.net/packages/")))
   )
 
+;;; general
+(global-linum-mode 1)
+(define-key global-map (kbd "C-c ;") 'iedit-mode)
+
+;;; CEDET
+;(require 'cedet)
+(semantic-mode 1)
+(global-ede-mode 1)
+(global-semantic-idle-scheduler-mode 1) ; to allow the reparsing of the files
+;(global-semantic-idle-completions-mode t)
+;(global-semantic-decoration-mode nil)
+;(semantic-load-enable-minimum-features)
+;(semantic-load-enable-code-helpers)
+
+
 ;;; autopair
 (require 'autopair)
 (autopair-global-mode) ;; to enable in all buffers
@@ -31,14 +46,30 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
-(defun my:ac-c-headers()
+
+(defun my:complex-c-cpphook()
   (require 'auto-complete-c-headers)
   (add-to-list 'ac-sources 'ac-source-c-headers)
-  (add-to-list 'achead:include-directories '"")
+  (add-to-list 'ac-sources 'ac-source-semantic)
+  (add-to-list 'achead:include-directories '".")
+
+  (show-paren-mode 1)
+  (irony-mode 1)
 )
 
-(add-hook 'c++-mode-hook 'my:ac-c-headers)
-(add-hook 'c-mode-hook 'my:ac-c-headers)
+(add-hook 'c++-mode-hook 'my:complex-c-cpphook)
+(add-hook 'c-mode-hook 'my:complex-c-cpphook)
+
+;; replace the `completion-at-point' and `complete-symbol' bindings in
+;; irony-mode's buffers by irony-mode's asynchronous function
+(defun my-irony-mode-hook ()
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+
+(add-hook 'irony-mode-hook 'my-irony-mode-hook)
+
 
 ;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict/")
 ;; (setq ac-sources '(ac-source-filename
@@ -50,9 +81,9 @@
 ;; 		   ac-source-c-headers))
 ;;(add-to-list 'ac-sources 'ac-source-c-headers)
 
+(setq ac-use-fuzzy t)
+(ac-set-trigger-key "TAB")
 
-;(setq ac-use-fuzzy t)
-;;(ac-set-trigger-key "TAB")
 ;(setq ac-auto-start 3)
 ;(setq ac-auto-show-menu 3)
 ;(require 'flymake-jslint)
@@ -169,15 +200,6 @@
 (setq TeX-PDF-mode t)
 (require 'auto-complete-auctex)
 
-;;; CEDET
-;(require 'cedet)
-;(global-ede-mode 1)
-;(semantic-mode 1)
-;(global-semantic-idle-completions-mode t)
-;(global-semantic-decoration-mode nil)
-;(semantic-load-enable-minimum-features)
-;(semantic-load-enable-code-helpers)
-
 ;;; ssh config
 (autoload 'ssh-config-mode "ssh-config-mode" t)
 (add-to-list 'auto-mode-alist '(".ssh/config\\'"  . ssh-config-mode))
@@ -199,7 +221,10 @@
 ;;(require 'vc-git)
 ;;(require 'magit)
 
-;(global-linum-mode 1)
+;;; ESS
+(require 'ess-site)
+
+
 ;(setq width (max width (+ (length str) 1)))
 
 (custom-set-variables
