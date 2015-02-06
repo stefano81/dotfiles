@@ -17,16 +17,22 @@
 			   ("melpa" . "http://melpa.milkbox.net/packages/")))
   )
 
+
 ;;; general
 (global-linum-mode 1)
 (define-key global-map (kbd "C-c ;") 'iedit-mode)
 
+;;; ORG-mode
+(add-hook 'org-mode-hook (lambda ()
+			   (flyspell-mode 1)
+			   ))
+
 ;;; CEDET
 ;(require 'cedet)
 (semantic-mode 1)
-(global-ede-mode 1)
-(global-semantic-idle-scheduler-mode 1) ; to allow the reparsing of the files
-;(global-semantic-idle-completions-mode t)
+;(global-ede-mode 1)
+;(global-semantic-idle-scheduler-mode 1) ; to allow the reparsing of the files
+(global-semantic-idle-completions-mode t)
 ;(global-semantic-decoration-mode nil)
 ;(semantic-load-enable-minimum-features)
 ;(semantic-load-enable-code-helpers)
@@ -54,7 +60,7 @@
   (add-to-list 'achead:include-directories '".")
 
   (show-paren-mode 1)
-  (irony-mode 1)
+  ;;(irony-mode 1)
 )
 
 (add-hook 'c++-mode-hook 'my:complex-c-cpphook)
@@ -189,10 +195,10 @@
 
 ;;; AUCTeX
 ;;(require 'auctex)
-(add-hook 'LaTeX-mode-hook 'visual-line-mode)
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(add-hook 'LaTeX-mode-hook (lambda()(visual-line-mode)
+(flyspell-mode)
+(LaTeX-math-mode)
+(turn-on-reftex)))
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-PDF-mode t)
 (require 'auto-complete-auctex)
