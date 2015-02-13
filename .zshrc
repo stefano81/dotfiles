@@ -7,7 +7,8 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="fox"
-ZSH_THEME="kphoen"
+ZSH_THEME="kphoen" # my default
+#ZSH_THEME="rkj-repos" # not bad
 #ZSH_THEME="random"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -48,7 +49,7 @@ HIST_STAMP="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git mvn npm adb python zsh_reload)
+plugins=(git mvn npm adb python zsh_reload emacs)
 
 source $ZSH/oh-my-zsh.sh
 
