@@ -182,7 +182,7 @@
 
 
 ;;; AUCTeX
-(require 'auctex)
+;(require 'auctex)
 (add-hook 'LaTeX-mode-hook (lambda()(visual-line-mode)
 (flyspell-mode)
 (LaTeX-math-mode)
