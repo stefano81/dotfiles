@@ -1,9 +1,9 @@
-;;; color themes
-;(require 'color-theme)
-;(load-theme 'wombat)
-(load-theme 'misterioso)
+;;; package -- Summary
+
+;;; Commentary:
 
 ;;; to avoid issues under OS X
+;;; Code:
 (when (eq system-type 'darwin) ;; mac specific settings
   (setq mac-option-modifier 'alt)
   (setq mac-command-modifier 'meta)
@@ -16,8 +16,20 @@
   (package-initialize)
   (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 			   ("marlalade" . "http://marmalade-repo.org/packages/")
+
 			   ("melpa" . "http://melpa.milkbox.net/packages/")))
+  (add-hook 'after-init-hook #'global-flycheck-mode)
   )
+
+;;; flycheck-mode
+(eval-after-load 'flycheck
+  '(custom-set-variables
+   '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
+
+
+;;; color themes
+;(load-theme 'wombat)
+(load-theme 'misterioso)
 
 
 ;;; general
@@ -27,14 +39,20 @@
 ;;; ORG-mode
 (add-hook 'org-mode-hook (lambda ()
 			   (flyspell-mode 1)
+
+;; 			   (org-capture-templates (quote (("t" "Todo" entry (file+headline "~/Documents/Dropbox/MobileOrg/newgtd.org" "Tasks") "* TODO %^{Brief Description} %^g%?
+;;   Added: %U") ("m" "Meeting" entry (file+datetree "~/Documents/Dropbox/MobileOrg/meetings.org") "* [%^{with}] %^{description} %? :MEETING:" :clock-in t :clock-resume t) ("p" "Presentation" entry (file+datetree "~/Documents/Dropbox/MobileOrg/presentations.org") "* %^{description} %? :TALK:" :clock-in t :clock-resume t) ("n" "Note" entry (file+headline "~/Documents/Dropbox/MobileOrg/notes.org" "") "
+;; * %^{topic} %T 
+;; %i%?
+;; "))))
 			   ))
 
 ;;; CEDET
 ;(require 'cedet)
-(semantic-mode 1)
+;(semantic-mode 1)
 ;(global-ede-mode 1)
 ;(global-semantic-idle-scheduler-mode 1) ; to allow the reparsing of the files
-(global-semantic-idle-completions-mode t)
+;(global-semantic-idle-completions-mode t)
 ;(global-semantic-decoration-mode nil)
 ;(semantic-load-enable-minimum-features)
 ;(semantic-load-enable-code-helpers)
@@ -66,11 +84,8 @@
 ;;(add-to-list 'ac-sources 'ac-source-c-headers)
 
 (setq ac-use-fuzzy t)
-;(ac-set-trigger-key "TAB")
-
 (setq ac-auto-start 3)
 (setq ac-auto-show-menu 3)
-(require 'flymake-jshint)
 
 ;;; javascript
 (require 'js2-mode)
@@ -80,30 +95,30 @@
 			   (ac-js2-mode)
  			   (show-paren-mode t)
  			   (auto-complete-mode t)
- 			   ;(js2-auto-indent-p t)
- 			   ;(js2-enter-indents-newline t)
- 			   ;(js2-indent-on-enter-key t)
+			   (js2-auto-indent-p t)
+			   (js2-enter-indents-newline t)
+ 			   (js2-indent-on-enter-key t)
  			   (setq js2-basic-offset 4)
- 			   (flymake-jshint-load)
+;			   (flycheck-mode)
+ ;			   (flymake-jshint-load)
  			   ))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 
 ;;; JSON
-(require 'flymake-json)
-(add-hook 'json-mode 'flymake-json-load)
+;(require 'flymake-json)
+;(add-hook 'json-mode (lambda()
+;		       (flymake-json-load)
+;		       ))
 
 ;;; force c++-mode
-;; (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
-;; (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
-;; (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;; ;;; Clang-format
-;; (load "/usr/share/emacs/site-lisp/clang-format-3.4/clang-format.el")
-;; (global-set-key [C-tab] 'clang-format-buffer)
-
-;; (load "/usr/share/emacs/site-lisp/clang-format-3.4/clang-format.el")
-;; (global-set-key [C-tab] 'clang-format-buffer)
+(load "/usr/share/emacs/site-lisp/clang-format-3.7/clang-format.el")
+(global-set-key [C-tab] 'clang-format-buffer)
 
 ;; (add-hook 'c++-mode-hook 'irony-mode)
 ;; (add-hook 'c-mode-hook 'irony-mode)
@@ -128,11 +143,17 @@
   (add-to-list 'ac-sources '(ac-source-clang-async))
   (add-to-list 'achead:include-directories '".")
 
+  (setq flycheck-clang-language-standard "c++11")
+
+  (setq c-tab-always-indent nil) ;; in C tab insert tab not always
+
   (show-paren-mode 1)
 
   (setq c-basic-offset 4)
   (setq indent-tabs-mode nil)
   (auto-fill-mode)
+  (c-toggle-auto-hungry-state 1)
+
   (font-lock-add-keywords
    nil '(;; complete some fundamental keywords
  	 ("\\<\\(void\\|unsigned\\|signed\\|char\\|short\\|bool\\|int\\|long\\|float\\|double\\)\\>" . font-lock-keyword-face)
@@ -150,10 +171,7 @@
  	 ("\\<\\(xstring\\|xchar\\)\\>" . font-lock-type-face)
  	 )
    )
-  ;;(c-toggle-auto-hungry-state 1)
   )
-
-;(add-hook 'c++-mode-hook 'my:complex-c-cpphook)
 
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 (add-hook 'c-mode-hook 'my-c++-mode-hook)
@@ -162,29 +180,9 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
 
-;;; ECB
-;;()
-
-;; (c-add-style "my-style"
-;; 	     '(;;"stroustrup"
-;; 	       "stroustrup"
-;; 	       (indent-tabs-mode . nil)
-;; 	       (c-basic-offset . 4)
-;; 	       (c-hanging-braces-alist . 
-;; 				       ((brace-list-open after)
-;; 					(brace-entry-open)
-;; 					(substatement-open after)
-;; 					(block-close . c-snug-do-while)
-;; 					(extern-lang-open after)
-;; 					(inexpr-class-open after)
-;; 					(inexpr-class-close before)))
-;; 	       ;; (c-offset-alist . ((inline-open . 1)
-;; 	       ;; 			  (brace-list-open . 1)
-;; 	       ;; 			  (statement-case-open . +)))))
-;; 	       ))
 
 ;;; AUCTeX
-;;(require 'auctex)
+(require 'auctex)
 (add-hook 'LaTeX-mode-hook (lambda()(visual-line-mode)
 (flyspell-mode)
 (LaTeX-math-mode)
