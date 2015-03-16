@@ -34,10 +34,19 @@
 
 ;;; company
 (eval-after-load 'company (lambda()
-  (add-to-list 'company-backends 'company-irony)
-  (add-to-list 'company-backends 'company-jedi)
-  )
+			    (add-to-list 'company-backends 'company-irony)
+			    (add-to-list 'company-backends 'company-anaconda)
+			    )
 )
+
+;;; autopair
+;(require autopair)
+
+;;; python
+(add-hook 'python-mode-hook (lambda()
+			      (anaconda-mode 1)
+			      (eldoc-mode 1)
+			      ))
 
 ;;; ORG-mode
 (add-hook 'org-mode-hook (lambda ()
@@ -45,7 +54,7 @@
 
 ;;; irony
 (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
-;(add-hook 'irony-mode-hook #'irony-eldoc-mode)
+;;(add-hook 'irony-mode-hook #'irony-eldoc-mode)
 
 
 ;;; C/C++
@@ -82,21 +91,19 @@
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 (add-hook 'c-mode-hook 'my-c++-mode-hook)
 
-
 ;;; javascript
 (require 'js2-mode)
 (require 'js2-refactor)
-
 (add-hook 'js2-mode-hook (lambda()
 			   (ac-js2-mode)
  			   (show-paren-mode t)
- 			   ;(auto-complete-mode t)
 			   (js2-auto-indent-p t)
 			   (js2-enter-indents-newline t)
  			   (js2-indent-on-enter-key t)
  			   (setq js2-basic-offset 4)
 			   (flycheck-mode)
  			   ))
+
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 
@@ -105,14 +112,19 @@
 (add-to-list 'auto-mode-alist '(".ssh/config\\'"  . ssh-config-mode))
 (add-to-list 'auto-mode-alist '("sshd?_config\\'" . ssh-config-mode))
 
-
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(inhibit-startup-screen t))
+ '(custom-safe-themes
+   (quote
+    ("315311e6374e2ec721715ba2ff3de6523bc664b7b55d0f2ad0bc8110b5abd6fb" default)))
+ '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
+ '(inhibit-startup-screen t)
+ '(package-selected-packages
+   (quote
+    (flycheck irony js2-mode vi-tilde-fringe ssh-config-mode js2-refactor irony-eldoc gitignore-mode github-theme git-commit-mode flycheck-pos-tip flycheck-irony company-math company-irony company-c-headers company-auctex company-anaconda color-theme autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
