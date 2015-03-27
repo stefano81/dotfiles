@@ -12,8 +12,8 @@
   )
 
 ;;; color themes
-;(load-theme 'wombat)
-(load-theme 'misterioso)
+(load-theme 'wombat)
+;;(load-theme 'misterioso)
 
 ;;; package manager
 (when (>= emacs-major-version 24)
@@ -26,6 +26,34 @@
   (add-hook 'after-init-hook #'global-flycheck-mode)
   (add-hook 'after-init-hook 'global-company-mode)
   )
+
+;;; ido
+(ido-mode t)
+
+;;; prelude
+;; (require 'prelude-c)
+;; ;; (require 'prelude-clojure)
+;; ;; (require 'prelude-coffee)
+;; ;; (require 'prelude-common-lisp)
+;; ;; (require 'prelude-css)
+;; (require 'prelude-emacs-lisp)
+;; (require 'prelude-erc)
+;; ;; (require 'prelude-erlang)
+;; ;; (require 'prelude-elixir)
+;; ;; (require 'prelude-haskell)
+;; (require 'prelude-js)
+;; ;; (require 'prelude-latex)
+;; (require 'prelude-lisp)
+;; ;; (require 'prelude-mediawiki)
+;; (require 'prelude-org)
+;; (require 'prelude-perl)
+;; ;; (require 'prelude-python)
+;; ;; (require 'prelude-ruby)
+;; ;; (require 'prelude-scala)
+;; (require 'prelude-scheme)
+;; ;; (require 'prelude-scss)
+;; ;; (require 'prelude-web)
+;; (require 'prelude-xml)
 
 ;;; flycheck-mode
 (eval-after-load 'flycheck
@@ -40,7 +68,11 @@
 )
 
 ;;; autopair
-;(require autopair)
+;;(require autopair)
+
+;; yiasnipet
+;(require 'yiasnipet)
+(yas-global-mode 1)
 
 ;;; python
 (add-hook 'python-mode-hook (lambda()
@@ -50,7 +82,9 @@
 
 ;;; ORG-mode
 (add-hook 'org-mode-hook (lambda ()
-			   (flyspell-mode 1)))
+			   (flyspell-mode 1)
+			   (setq org-log-done t)))
+
 
 ;;; irony
 (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
@@ -67,7 +101,7 @@
   (irony-mode)
   (show-paren-mode t)
   (eldoc-mode)
-  (irony-eldoc-mode)
+  (irony-eldoc)
 
   (font-lock-add-keywords
    nil '(;; complete some fundamental keywords
@@ -117,20 +151,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("315311e6374e2ec721715ba2ff3de6523bc664b7b55d0f2ad0bc8110b5abd6fb" default)))
  '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
- '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (flycheck irony js2-mode vi-tilde-fringe ssh-config-mode js2-refactor irony-eldoc gitignore-mode github-theme git-commit-mode flycheck-pos-tip flycheck-irony company-math company-irony company-c-headers company-auctex company-anaconda color-theme autopair))))
+    (karma grunt company auctex vi-tilde-fringe ssh-config-mode js2-refactor irony-eldoc gitignore-mode github-theme git-commit-mode flycheck-pos-tip flycheck-irony company-math company-irony company-c-headers company-anaconda color-theme autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(set-face-attribute 'default nil :height 100)
 
 (provide '.emacs)
 ;;; .emacs ends here
