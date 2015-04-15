@@ -27,8 +27,17 @@
   (add-hook 'after-init-hook 'global-company-mode)
   )
 
+;; magit
+(setq magit-auto-revert-mode nil)
+
+
 ;;; ido
-(ido-mode t)
+;;(ido-mode t)
+
+;;; helm-mode
+(require 'helm-config)
+(helm-mode t)
+(require 'helm-descbinds)
 
 ;;; prelude
 ;; (require 'prelude-c)
@@ -65,7 +74,23 @@
 			    (add-to-list 'company-backends 'company-irony)
 			    (add-to-list 'company-backends 'company-anaconda)
 			    )
-)
+		 )
+
+;;; LaTeX/AucTeX
+(setq reftex-plug-into-AUCTeX t)
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil)
+
+;(setq reftex-plug-into-AUCTeX nil)
+(add-hook 'LaTeX-mode-hook (lambda()
+
+			     (reftex-mode t)
+			     (flyspell-mode t)
+			     ))
+;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+;;(add-hook 'latex-mode-hook 'turn-on-reftex)
+
 
 ;;; autopair
 ;;(require autopair)
@@ -76,11 +101,13 @@
 
 ;;; python
 (add-hook 'python-mode-hook (lambda()
+			      (show-paren-mode t)
 			      (anaconda-mode 1)
 			      (eldoc-mode 1)
 			      ))
 
 ;;; ORG-mode
+(require 'ox-beamer) ;; for exporting to beamer
 (add-hook 'org-mode-hook (lambda ()
 			   (flyspell-mode 1)
 			   (setq org-log-done t)))
@@ -141,7 +168,7 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 
-;;; ssh config
+;;; ssh copnfig
 (autoload 'ssh-config-mode "ssh-config-mode" t)
 (add-to-list 'auto-mode-alist '(".ssh/config\\'"  . ssh-config-mode))
 (add-to-list 'auto-mode-alist '("sshd?_config\\'" . ssh-config-mode))
@@ -151,10 +178,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
  '(package-selected-packages
    (quote
-    (karma grunt company auctex vi-tilde-fringe ssh-config-mode js2-refactor irony-eldoc gitignore-mode github-theme git-commit-mode flycheck-pos-tip flycheck-irony company-math company-irony company-c-headers company-anaconda color-theme autopair))))
+    (yaml-mode vi-tilde-fringe ssh-config-mode markdown-mode magit karma js2-refactor irony-eldoc helm-google helm-git helm-descbinds helm-company helm-bibtex grunt gitignore-mode github-theme flycheck-pos-tip flycheck-irony company-math company-irony company-c-headers company-anaconda color-theme autopair auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
