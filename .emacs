@@ -12,8 +12,16 @@
   )
 
 ;;; color themes
-(load-theme 'wombat)
+;;(load-theme 'wombat t)
 ;;(load-theme 'misterioso)
+(add-to-list 'custom-theme-load-path "~/.emacs/themes");emacs-color-theme-solarized")
+(load-theme 'solarized t)
+(add-hook 'after-make-frame-functions
+          (lambda (frame)
+            (let ((mode (if (display-graphic-p frame) 'light 'dark)))
+              (set-frame-parameter frame 'background-mode mode)
+              (set-terminal-parameter frame 'background-mode mode))
+            (enable-theme 'solarized)))
 
 ;;; package manager
 (when (>= emacs-major-version 24)
@@ -25,11 +33,15 @@
 			   ("melpa" . "http://melpa.milkbox.net/packages/")))
   (add-hook 'after-init-hook #'global-flycheck-mode)
   (add-hook 'after-init-hook 'global-company-mode)
+
+  (browse-kill-ring-default-keybindings)
   )
 
-;; magit
+;;; magit
 (setq magit-auto-revert-mode nil)
 
+;;; flycheck-mode
+(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)
 
 ;;; ido
 ;;(ido-mode t)
@@ -38,6 +50,10 @@
 (require 'helm-config)
 (helm-mode t)
 (require 'helm-descbinds)
+(eval-after-load 'flycheck
+  '(define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
+;; (define-key flyspell-mode-map (kbd "C-;") 'helm-flyspell-correct)
+
 
 ;;; prelude
 ;; (require 'prelude-c)
@@ -84,7 +100,7 @@
 
 ;(setq reftex-plug-into-AUCTeX nil)
 (add-hook 'LaTeX-mode-hook (lambda()
-
+			     (set-fill-column 120)
 			     (reftex-mode t)
 			     (flyspell-mode t)
 			     ))
@@ -110,7 +126,10 @@
 (require 'ox-beamer) ;; for exporting to beamer
 (add-hook 'org-mode-hook (lambda ()
 			   (flyspell-mode 1)
-			   (setq org-log-done t)))
+			   (setq org-log-done t)
+			   ;;;(org-babel-do-load-languages 'org-babel-load-languages '((elasticsearch . t) (python . t) (sparql . t))))
+			   (org-babel-do-load-languages 'org-babel-load-languages '((python . t) (sparql . t))))
+	  )
 
 
 ;;; irony
@@ -180,7 +199,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yaml-mode vi-tilde-fringe ssh-config-mode markdown-mode magit karma js2-refactor irony-eldoc helm-google helm-git helm-descbinds helm-company helm-bibtex grunt gitignore-mode github-theme flycheck-pos-tip flycheck-irony company-math company-irony company-c-headers company-anaconda color-theme autopair auctex))))
+    (yaml-mode vi-tilde-fringe ssh-config-mode sparql-mode org markdown-mode magit karma json-mode js2-mode irony-eldoc helm-google helm-git helm-flyspell helm-flycheck helm-descbinds helm-company helm-bibtex grunt gnuplot gitignore-mode github-theme flycheck-pos-tip flycheck-irony flycheck-color-mode-line company-math company-irony company-c-headers company-auctex company-anaconda color-theme browse-kill-ring autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
