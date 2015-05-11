@@ -14,7 +14,7 @@
 ;;; color themes
 ;;(load-theme 'wombat t)
 ;;(load-theme 'misterioso)
-(add-to-list 'custom-theme-load-path "~/.emacs/themes");emacs-color-theme-solarized")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/emacs-color-theme-solarized")
 (load-theme 'solarized t)
 (add-hook 'after-make-frame-functions
           (lambda (frame)
@@ -199,7 +199,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yaml-mode vi-tilde-fringe ssh-config-mode sparql-mode org markdown-mode magit karma json-mode js2-mode irony-eldoc helm-google helm-git helm-flyspell helm-flycheck helm-descbinds helm-company helm-bibtex grunt gnuplot gitignore-mode github-theme flycheck-pos-tip flycheck-irony flycheck-color-mode-line company-math company-irony company-c-headers company-auctex company-anaconda color-theme browse-kill-ring autopair))))
+    (js2-refactor yaml-mode vi-tilde-fringe ssh-config-mode sparql-mode org markdown-mode magit karma json-mode js2-mode irony-eldoc helm-google helm-git helm-flyspell helm-flycheck helm-descbinds helm-company helm-bibtex grunt gnuplot gitignore-mode github-theme flycheck-pos-tip flycheck-irony flycheck-color-mode-line company-math company-irony company-c-headers company-auctex company-anaconda color-theme browse-kill-ring autopair))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
