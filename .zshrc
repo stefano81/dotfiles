@@ -64,6 +64,7 @@ setopt inc_append_history
 setopt share_history
 setopt histignoredups
 
+
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -89,7 +90,10 @@ export ARCHFLAGS="-arch x86_64"
 # nvm
 export NVM_DIR=~/.nvm
 source ~/.nvm/nvm.sh
-source $HOME/Downloads/dsdriver/db2profile
+
+if [ -e "$HOME/Downloads/dsdriver/db2profile" ] ; then
+   source $HOME/Downloads/dsdriver/db2profile
+fi
 
 autoload -U zmv
 
@@ -97,4 +101,9 @@ autoload -U zmv
 # virtualenv
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
-source /usr/local/bin/virtualenvwrapper.sh
+if [ -e "/usr/local/bin/virtualenvwrapper.sh" ]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
+
+export TERM="xterm-256color"
+setopt interactivecomments
