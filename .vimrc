@@ -2,16 +2,24 @@
 " My preferences so far...
 """
 
-set runtimepath=~/.vim,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after
+set nocompatible " be iMproved, required
+filetype off     " required
 
-set nocompatible
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-""" pathogen
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
+Plugin 'gmarik/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrollloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'bling/vim-airline'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
-set background=dark
+call vundle#end()	  "required
+filetype plugin indent on "required
+
+"set background=dark
 colorscheme elflord
 
 " Uncomment the following to have Vim load indentation rules and plugins
@@ -40,3 +48,12 @@ set ruler
 set modeline
 
 set clipboard=unnamedplus
+
+" open eclim quickfix window
+command PP ProjectPloblems
+nnoremap <silent> <Leader>js :JavaSearchContext
+
+let g:EclimCompletionMethod = 'omnifunction'
+
+
+let g:tex_flavor='latex'
