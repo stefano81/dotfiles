@@ -25,7 +25,7 @@
  '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
  '(package-selected-packages
    (quote
-    (js2-mode markdown-mode flycheck-pos-tip autopair helm-descbinds browse-kill-ring org magit-filenotify helm-flyspell helm-flycheck helm-company helm-bibtex flycheck-irony flycheck-color-mode-line emacs-eclim company-math company-irony company-c-headers company-auctex company-anaconda))))
+    (flycheck-tip ssh-config-mode scala-mode js2-mode markdown-mode flycheck-pos-tip autopair helm-descbinds browse-kill-ring org magit-filenotify helm-flyspell helm-flycheck helm-company helm-bibtex flycheck-irony flycheck-color-mode-line emacs-eclim company-math company-irony company-c-headers company-auctex company-anaconda))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -54,19 +54,7 @@
 ;;; flycheck-mode
 (eval-after-load 'flycheck
   '(custom-set-variables
-   '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
-
-;;; company
-(require 'company)
-(require 'company-emacs-eclim)
-(eval-after-load 'company (lambda()
-			    (add-to-list 'company-backends 'company-irony)
-			    (add-to-list 'company-backends 'company-anaconda)
-			    (add-to-list 'company-backends 'company-eclim)
-			    ;(company-emacs-eclim-setup)
-			    )
-		 )
-;;;(global-company-mode t)
+    '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
 
 ;;; eclim
 (require 'eclim)
@@ -75,12 +63,27 @@
 (setq eclim-eclipse-dirs '"~/eclipse")
 (setq eclim-executable '"~/eclipse/eclim")
 (require 'company-emacs-eclim)
+(setq help-at-pt-display-when-idle t)
+(setq help-at-pt-timer-delay 0.1)
+(help-at-pt-set-timer)
+
+;;; company
+(require 'company)
+(require 'company-emacs-eclim)
+;(company-emacs-eclim-setup)
+( eval-after-load 'company (lambda()
+ 			    (add-to-list 'company-backends 'company-irony)
+ 			    (add-to-list 'company-backends 'company-anaconda)
+ 			    ;(add-to-list 'company-backends 'company-eclim)
+ 			    )
+ 		 )
+(global-company-mode t)
 
 ;;; Java
-;;;(require 'company-emacs-eclim)
+(require 'company-emacs-eclim)
 (add-hook 'java-mode-hook (lambda()
-			    (eclim-mode t)
-			    ))
+ 			    (eclim-mode)
+ 			    ))
 ;;; irony
 (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
 ;;;(add-hook 'irony-mode-hook #'irony-eldoc-mode)
@@ -91,12 +94,12 @@
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
 
-;(setq reftex-plug-into-AUCTeX nil)
+(setq reftex-plug-into-AUCTeX nil)
 (add-hook 'LaTeX-mode-hook (lambda()
-			     (set-fill-column 120)
-			     (reftex-mode t)
-			     (flyspell-mode t)
-			     ))
+ 			     (set-fill-column 120)
+ 			     (reftex-mode t)
+ 			     (flyspell-mode t)
+ 			     ))
 ;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 ;;(add-hook 'latex-mode-hook 'turn-on-reftex)
 
@@ -105,24 +108,24 @@
 (show-paren-mode t)
 
 ;; yiasnipet
-;(require 'yiasnipet)
+;(require 'yasnipet)
 (yas-global-mode t)
 
 ;;; python
 (add-hook 'python-mode-hook (lambda()
-			      (show-paren-mode t)
-			      (anaconda-mode 1)
-			      (eldoc-mode 1)
-			      ))
+ 			      (show-paren-mode t)
+ 			      (anaconda-mode 1)
+ 			      (eldoc-mode 1)
+ 			      ))
 
 ;;; ORG-mode
 (require 'ox-beamer) ;; for exporting to beamer
 (add-hook 'org-mode-hook (lambda ()
-			   (flyspell-mode 1)
-			   (setq org-log-done t)
-			   ;;;(org-babel-do-load-languages 'org-babel-load-languages '((elasticsearch . t) (python . t) (sparql . t))))
-			   (org-babel-do-load-languages 'org-babel-load-languages '((python . t) (sparql . t))))
-	  )
+ 			   (flyspell-mode 1)
+ 			   (setq org-log-done t)
+ 			   ;;;(org-babel-do-load-languages 'org-babel-load-languages '((elasticsearch . t) (python . t) (sparql . t))))
+ 			   (org-babel-do-load-languages 'org-babel-load-languages '((python . t) (sparql . t))))
+ 	  )
 
 ;;; C/C++
 (defun my-c++-mode-hook()
@@ -136,8 +139,8 @@
   (eldoc-mode)
   (irony-eldoc)
 
-  (font-lock-add-keywords
-   nil '(;; complete some fundamental keywords
+   (font-lock-add-keywords
+    nil '(;; complete some fundamental keywords
  	 ("\\<\\(void\\|unsigned\\|signed\\|char\\|short\\|bool\\|int\\|long\\|float\\|double\\)\\>" . font-lock-keyword-face)
  	 ;; add the new C++11 keywords
  	 ("\\<\\(alignof\\|alignas\\|constexpr\\|decltype\\|noexcept\\|nullptr\\|static_assert\\|thread_local\\|override\\|final\\)\\>" . font-lock-keyword-face)
@@ -158,7 +161,7 @@
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
 (add-hook 'c-mode-hook 'my-c++-mode-hook)
 
-;;; ssh config
+;; ;;; ssh config
 (autoload 'ssh-config-mode "ssh-config-mode" t)
 (add-to-list 'auto-mode-alist '(".ssh/config\\'"  . ssh-config-mode))
 (add-to-list 'auto-mode-alist '("sshd?_config\\'" . ssh-config-mode))
