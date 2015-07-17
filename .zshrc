@@ -49,13 +49,21 @@ HIST_STAMP="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git mvn npm adb python zsh_reload emacs)
+plugins=(git python zsh_reload emacs)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/adt-bundle-linux-x86_64-20131030/sdk/tools:$HOME/adt-bundle-linux-x86_64-20131030/sdk/platform-tools:/opt/ibm/jazz-4.0.3/scmtools/eclipse:/usr/local/games:$HOME/Utilities/mongodb/bin:$HOME/Utilities/redis"
+export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/adt-bundle-linux-x86_64-20131030/sdk/tools:$HOME/adt-bundle-linux-x86_64-20131030/sdk/platform-tools:/opt/ibm/jazz-4.0.3/scmtools/eclipse:/usr/local/games:$HOME/Utilities/mongodb/bin:$HOME/Utilities/redis:$HOME/Utilities/idea/bin"
 export MANPATH="/usr/local/man:$MANPATH"
+
+if [ -d "$HOME/Utilities/scala" ]; then
+    export SCALA_HOME="$HOME/Utilities/scala"
+    export PATH=$PATH:$SCALA_HOME/bin
+fi
+if [ -d "$HOME/Utilites/sbt" ]; then
+    export PATH="$PATH:$HOME/Utilities/sbt/bin"
+fi
 
 # You may need to manually set your language environment
 export LANG=en_GB.UTF-8
@@ -63,7 +71,6 @@ export LANG=en_GB.UTF-8
 setopt inc_append_history
 setopt share_history
 setopt histignoredups
-
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -88,15 +95,16 @@ export ARCHFLAGS="-arch x86_64"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 # nvm
-export NVM_DIR=~/.nvm
-source ~/.nvm/nvm.sh
+if [ -d "~/.nvm" ]; then
+    export NVM_DIR=~/.nvm
+    source ~/.nvm/nvm.sh
+fi
 
 if [ -e "$HOME/Downloads/dsdriver/db2profile" ] ; then
    source $HOME/Downloads/dsdriver/db2profile
 fi
 
 autoload -U zmv
-
 
 # virtualenv
 export WORKON_HOME=$HOME/.virtualenvs

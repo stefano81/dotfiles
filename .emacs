@@ -25,7 +25,7 @@
  '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
  '(package-selected-packages
    (quote
-    (flycheck-tip ssh-config-mode scala-mode js2-mode markdown-mode flycheck-pos-tip autopair helm-descbinds browse-kill-ring org magit-filenotify helm-flyspell helm-flycheck helm-company helm-bibtex flycheck-irony flycheck-color-mode-line emacs-eclim company-math company-irony company-c-headers company-auctex company-anaconda))))
+    (json-mode anaconda-mode ensime flycheck-tip ssh-config-mode scala-mode js2-mode markdown-mode flycheck-pos-tip autopair helm-descbinds browse-kill-ring org magit-filenotify helm-flyspell helm-flycheck helm-company helm-bibtex flycheck-irony flycheck-color-mode-line emacs-eclim company-math company-irony company-c-headers company-auctex company-anaconda))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -74,7 +74,8 @@
 ( eval-after-load 'company (lambda()
  			    (add-to-list 'company-backends 'company-irony)
  			    (add-to-list 'company-backends 'company-anaconda)
- 			    ;(add-to-list 'company-backends 'company-eclim)
+			    ;;(add-to-list 'company-backends 'company-eclim)
+			    (add-to-list 'company-backends 'company-emacs-eclim)
  			    )
  		 )
 (global-company-mode t)
@@ -165,6 +166,17 @@
 (autoload 'ssh-config-mode "ssh-config-mode" t)
 (add-to-list 'auto-mode-alist '(".ssh/config\\'"  . ssh-config-mode))
 (add-to-list 'auto-mode-alist '("sshd?_config\\'" . ssh-config-mode))
+
+;; scala
+(setq exec-path (append exec-path (list "~/Utilites/scala/bin" )))
+(require 'scala-mode-auto)
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+(eval-after-load "scala-mode"
+  '(progn
+     (define-key scala-mode-map (kbd "<f9>") 'ensime-builder-build)
+     (define-key scala-mode-map (kbd "<f10>") 'ensime-inf-switch)))
+     
 
 (provide '.emacs)
 ;;; .emacs ends here
