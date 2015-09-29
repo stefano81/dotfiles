@@ -49,7 +49,7 @@ HIST_STAMP="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git python zsh_reload emacs)
+plugins=(zsh_reload emacs scala sbt mvn)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -59,9 +59,9 @@ export MANPATH="/usr/local/man:$MANPATH"
 
 if [ -d "$HOME/Utilities/scala" ]; then
     export SCALA_HOME="$HOME/Utilities/scala"
-    export PATH=$PATH:$SCALA_HOME/bin
+    export PATH="$PATH:$SCALA_HOME/bin"
 fi
-if [ -d "$HOME/Utilites/sbt" ]; then
+if [ -d "$HOME/Utilities/sbt" ]; then
     export PATH="$PATH:$HOME/Utilities/sbt/bin"
 fi
 
@@ -95,13 +95,15 @@ export ARCHFLAGS="-arch x86_64"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 # nvm
-if [ -d "~/.nvm" ]; then
+if [ -d "$HOME/.nvm" ]; then
     export NVM_DIR=~/.nvm
     source ~/.nvm/nvm.sh
 fi
-
-if [ -e "$HOME/Downloads/dsdriver/db2profile" ] ; then
+if [ -e "$HOME/Downloads/dsdriver/db2profile" ]; then
    source $HOME/Downloads/dsdriver/db2profile
+fi
+if [ -d "$HOME/Utilities/spark-1.4.1-bin-hadoop2.6" ]; then
+    export PATH="$PATH:$HOME/Utilities/spark-1.4.1-bin-hadoop2.6/bin"
 fi
 
 autoload -U zmv

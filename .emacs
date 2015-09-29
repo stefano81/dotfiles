@@ -1,9 +1,11 @@
+;;; Commentary
+;;; Code:
+
 (when (eq system-type 'darwin) ;; mac specific settings
   (setq mac-option-modifier 'alt)
   (setq mac-command-modifier 'meta)
   (global-set-key [kp-delete] 'delete-char) ;; sets fn-delete to be right-delete
   )
-(load-theme 'misterioso)
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -16,16 +18,24 @@
   (add-hook 'after-init-hook 'global-company-mode)
 
   (browse-kill-ring-default-keybindings)
+
+  (when (not package-archive-contents)
+    (package-refresh-contents))
   )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
  '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
+ '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (json-mode anaconda-mode ensime flycheck-tip ssh-config-mode scala-mode js2-mode markdown-mode flycheck-pos-tip autopair helm-descbinds browse-kill-ring org magit-filenotify helm-flyspell helm-flycheck helm-company helm-bibtex flycheck-irony flycheck-color-mode-line emacs-eclim company-math company-irony company-c-headers company-auctex company-anaconda))))
+    (solarized-theme scala-mode color-theme-solarized sbt-mode json-mode anaconda-mode ensime flycheck-tip ssh-config-mode js2-mode markdown-mode flycheck-pos-tip autopair helm-descbinds browse-kill-ring org magit-filenotify helm-flyspell helm-flycheck helm-company helm-bibtex flycheck-irony flycheck-color-mode-line emacs-eclim company-math company-irony company-c-headers company-auctex company-anaconda))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -168,15 +178,21 @@
 (add-to-list 'auto-mode-alist '("sshd?_config\\'" . ssh-config-mode))
 
 ;; scala
+
 (setq exec-path (append exec-path (list "~/Utilites/scala/bin" )))
-(require 'scala-mode-auto)
+(require 'scala-mode2)
+(require 'sbt-mode)
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 (eval-after-load "scala-mode"
   '(progn
      (define-key scala-mode-map (kbd "<f9>") 'ensime-builder-build)
      (define-key scala-mode-map (kbd "<f10>") 'ensime-inf-switch)))
-     
+
+
+;; theme
+;(load-theme 'misterioso)
+(load-theme 'solarized-dark 1 nil)
 
 (provide '.emacs)
 ;;; .emacs ends here
