@@ -209,4 +209,4 @@ bindsym $mod+x move workspace to output right
 # new_window 1pixel
 
 for_window[class="File-roller"] floating enable, border normal
-for_window[class="Pcmanfm"] floating enable, border norma
+for_window[class="Pcmanfm"] floating enable, border normal
