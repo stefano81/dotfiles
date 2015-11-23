@@ -210,3 +210,5 @@ bindsym $mod+x move workspace to output right
 
 for_window[class="File-roller"] floating enable, border normal
 for_window[class="Pcmanfm"] floating enable, border normal
+for_window[class="Gnome-screenshot"] floating enable, border normal
+for_window[class="Agnclient"] floating enable, border normal

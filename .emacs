@@ -28,6 +28,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
  '(custom-safe-themes
    (quote
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
@@ -35,7 +36,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (solarized-theme scala-mode color-theme-solarized sbt-mode json-mode anaconda-mode ensime flycheck-tip ssh-config-mode js2-mode markdown-mode flycheck-pos-tip autopair helm-descbinds browse-kill-ring org magit-filenotify helm-flyspell helm-flycheck helm-company helm-bibtex flycheck-irony flycheck-color-mode-line emacs-eclim company-math company-irony company-c-headers company-auctex company-anaconda))))
+    (java-snippets irony-eldoc ensime csv-mode all yasnippet sparql-mode solarized-theme scala-mode color-theme-solarized sbt-mode json-mode anaconda-mode flycheck-tip ssh-config-mode js2-mode markdown-mode flycheck-pos-tip autopair helm-descbinds browse-kill-ring org magit-filenotify helm-flyspell helm-flycheck helm-company helm-bibtex flycheck-irony flycheck-color-mode-line emacs-eclim company-math company-irony company-c-headers company-auctex company-anaconda))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -43,6 +44,8 @@
  ;; If there is more than one, they won't work right.
  )
 
+;;; general
+(set-fill-column 120)
 
 ;;; magit
 (setq magit-auto-revert-mode nil)
@@ -129,14 +132,25 @@
  			      (eldoc-mode 1)
  			      ))
 
+;;; enable encryption
+(require 'epa-file)
+(epa-file-enable)
+
 ;;; ORG-mode
 (require 'ox-beamer) ;; for exporting to beamer
 (add-hook 'org-mode-hook (lambda ()
  			   (flyspell-mode 1)
+			   (set-fill-column 120)
  			   (setq org-log-done t)
  			   ;;;(org-babel-do-load-languages 'org-babel-load-languages '((elasticsearch . t) (python . t) (sparql . t))))
  			   (org-babel-do-load-languages 'org-babel-load-languages '((python . t) (sparql . t))))
  	  )
+(require 'org-crypt)
+(org-crypt-use-before-save-magic)
+(setq org-tags-exclude-from-inheritance (quote ("crypt")))
+;; GPG key to use for encryption
+;; Either the Key ID or set to nil to use symmetric encryption.
+(setq org-crypt-key nil)
 
 ;;; C/C++
 (defun my-c++-mode-hook()
@@ -178,16 +192,15 @@
 (add-to-list 'auto-mode-alist '("sshd?_config\\'" . ssh-config-mode))
 
 ;; scala
-
 (setq exec-path (append exec-path (list "~/Utilites/scala/bin" )))
 (require 'scala-mode2)
 (require 'sbt-mode)
-(require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-(eval-after-load "scala-mode"
-  '(progn
-     (define-key scala-mode-map (kbd "<f9>") 'ensime-builder-build)
-     (define-key scala-mode-map (kbd "<f10>") 'ensime-inf-switch)))
+;; (require 'ensime)
+;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+;; (eval-after-load "scala-mode"
+;;   '(progn
+;;      (define-key scala-mode-map (kbd "<f9>") 'ensime-builder-build)
+;;      (define-key scala-mode-map (kbd "<f10>") 'ensime-inf-switch)))
 
 
 ;; theme

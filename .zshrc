@@ -49,7 +49,7 @@ HIST_STAMP="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh_reload emacs scala sbt mvn)
+plugins=(zsh_reload emacs scala sbt mvn colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -61,9 +61,9 @@ if [ -d "$HOME/Utilities/scala" ]; then
     export SCALA_HOME="$HOME/Utilities/scala"
     export PATH="$PATH:$SCALA_HOME/bin"
 fi
-if [ -d "$HOME/Utilities/sbt" ]; then
-    export PATH="$PATH:$HOME/Utilities/sbt/bin"
-fi
+#if [ -d "$HOME/Utilities/sbt" ]; then
+#    export PATH="$PATH:$HOME/Utilities/sbt/bin"
+#fi
 
 # You may need to manually set your language environment
 export LANG=en_GB.UTF-8
