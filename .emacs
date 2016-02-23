@@ -1,4 +1,5 @@
-;;; Commentary
+;;; package --- Summary
+;;; Commentary:
 ;;; Code:
 
 (when (eq system-type 'darwin) ;; mac specific settings
@@ -35,11 +36,11 @@
  '(custom-safe-themes
    (quote
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
- '(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
+ ;'(flycheck-display-errors-function (function flycheck-pos-tip-error-messages))
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (helm-bind-key java-snippets irony-eldoc csv-mode all yasnippet sparql-mode solarized-theme scala-mode color-theme-solarized sbt-mode json-mode anaconda-mode flycheck-tip ssh-config-mode js2-mode markdown-mode flycheck-pos-tip autopair helm-descbinds browse-kill-ring org magit-filenotify helm-flyspell helm-flycheck helm-company helm-bibtex flycheck-irony flycheck-color-mode-line emacs-eclim company-math company-irony company-c-headers company-auctex company-anaconda))))
+    (yaml-mode anaconda-mode helm-bind-key java-snippets irony-eldoc csv-mode all yasnippet sparql-mode solarized-theme scala-mode color-theme-solarized sbt-mode json-mode flycheck-tip ssh-config-mode js2-mode markdown-mode flycheck-pos-tip autopair helm-descbinds browse-kill-ring org magit-filenotify helm-flyspell helm-flycheck helm-company helm-bibtex flycheck-irony flycheck-color-mode-line emacs-eclim company-math company-irony company-c-headers company-auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -69,9 +70,9 @@
 ;; (define-key flyspell-mode-map (kbd "C-;") 'helm-flyspell-correct)
 
 ;;; flycheck-mode
-(eval-after-load 'flycheck
-  '(custom-set-variables
-    '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
+;; (eval-after-load 'flycheck
+;;   '(custom-set-variables
+;;     '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
 
 ;;; eclim
 (require 'eclim)

@@ -1,3 +1,4 @@
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -54,7 +55,7 @@ plugins=(zsh_reload emacs scala sbt mvn colored-man-pages)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/adt-bundle-linux-x86_64-20131030/sdk/tools:$HOME/adt-bundle-linux-x86_64-20131030/sdk/platform-tools:/opt/ibm/jazz-4.0.3/scmtools/eclipse:/usr/local/games:$HOME/Utilities/mongodb/bin:$HOME/Utilities/redis:$HOME/Utilities/idea/bin"
+export PATH="$PATH:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/adt-bundle-linux-x86_64-20131030/sdk/tools:$HOME/adt-bundle-linux-x86_64-20131030/sdk/platform-tools:/opt/ibm/jazz-4.0.3/scmtools/eclipse:/usr/local/games:$HOME/Utilities/mongodb/bin:$HOME/Utilities/redis:$HOME/Utilities/idea/bin"
 export MANPATH="/usr/local/man:$MANPATH"
 
 if [ -d "$HOME/Utilities/scala" ]; then
@@ -64,6 +65,11 @@ fi
 #if [ -d "$HOME/Utilities/sbt" ]; then
 #    export PATH="$PATH:$HOME/Utilities/sbt/bin"
 #fi
+
+if [ -d "/Library/TeX/texbin" -o ]; then
+    # El Capitan trick..
+    export PATH=$PATH:/Library/TeX/texbin/
+fi
 
 # You may need to manually set your language environment
 export LANG=en_GB.UTF-8

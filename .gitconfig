@@ -1,6 +1,6 @@
 [user]
 	name = Stefano Braghin
-	email = stefano.braghin+git@gmail.com
+	email = stefanob@ie.ibm.com
 [color]
 	branch = auto
 	diff = auto
@@ -8,5 +8,6 @@
 	showbranch = auto
 [core]
 	excludesfile = /home/stefanob/.gitignore
+	autocrlf = input
 [push]
         default = matching
