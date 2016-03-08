@@ -1,4 +1,3 @@
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -35,7 +34,7 @@ COMPLETION_WAITING_DOTS="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -50,12 +49,30 @@ HIST_STAMP="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh_reload emacs scala sbt mvn colored-man-pages)
+plugins=(zsh_reload scala sbt mvn colored-man-pages brew)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH="$PATH:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/adt-bundle-linux-x86_64-20131030/sdk/tools:$HOME/adt-bundle-linux-x86_64-20131030/sdk/platform-tools:/opt/ibm/jazz-4.0.3/scmtools/eclipse:/usr/local/games:$HOME/Utilities/mongodb/bin:$HOME/Utilities/redis:$HOME/Utilities/idea/bin"
+# for brew
+export PATH="$HOME/bin:/usr/local/sbin:/usr/local/games:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
+
+# android
+export ANDROID_HOME="$HOME/adt-bundle-linux-x86_64-20131030"
+if [ -d "$ANDROID_HOME" ]; then
+    export PATH="$PATH:$ANDROID_HOME/sdk/tools:$ANDROID_HOME/platform-tools"
+fi
+
+# mongo
+if [ -d "$HOME/Utilities/mongodb/bin" ]; then
+    export PATH="$PATH:$HOME/Utilities/mongodb/bin"
+fi
+
+# idea
+if [ -d "$HOME/Utilities/idea/bin" ]; then
+    export PATH="$PATH:$HOME/Utilities/idea/bin"
+fi
+
 export MANPATH="/usr/local/man:$MANPATH"
 
 if [ -d "$HOME/Utilities/scala" ]; then
@@ -68,7 +85,7 @@ fi
 
 if [ -d "/Library/TeX/texbin" -o ]; then
     # El Capitan trick..
-    export PATH=$PATH:/Library/TeX/texbin/
+    export PATH="$PATH:/Library/TeX/texbin"
 fi
 
 # You may need to manually set your language environment
@@ -111,8 +128,8 @@ fi
 if [ -e "$HOME/Downloads/dsdriver/db2profile" ]; then
    source $HOME/Downloads/dsdriver/db2profile
 fi
-if [ -d "$HOME/Utilities/spark-1.4.1-bin-hadoop2.6" ]; then
-    export PATH="$PATH:$HOME/Utilities/spark-1.4.1-bin-hadoop2.6/bin"
+if [ -f "$HOME/.keys" ]; then
+    source $HOME/.keys
 fi
 
 autoload -U zmv
