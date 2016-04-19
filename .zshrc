@@ -49,13 +49,17 @@ HIST_STAMP="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh_reload scala sbt mvn colored-man-pages brew)
+plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 # for brew
 export PATH="$HOME/bin:/usr/local/sbin:/usr/local/games:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
+
+if [ "$(uname -s)" == "Darwin" ]; then
+    export JAVA_HOME=$(/usr/libexec/java_home)
+fi
 
 # android
 export ANDROID_HOME="$HOME/adt-bundle-linux-x86_64-20131030"
@@ -73,15 +77,20 @@ if [ -d "$HOME/Utilities/idea/bin" ]; then
     export PATH="$PATH:$HOME/Utilities/idea/bin"
 fi
 
+# spark
+if [ -d "$HOME/Utilities/spark/bin" ]; then
+    export PATH="$PATH:$HOME/Utilities/spark/bin"
+fi
+
 export MANPATH="/usr/local/man:$MANPATH"
 
 if [ -d "$HOME/Utilities/scala" ]; then
     export SCALA_HOME="$HOME/Utilities/scala"
     export PATH="$PATH:$SCALA_HOME/bin"
 fi
-#if [ -d "$HOME/Utilities/sbt" ]; then
-#    export PATH="$PATH:$HOME/Utilities/sbt/bin"
-#fi
+if [ -d "$HOME/Utilities/sbt" ]; then
+    export PATH="$PATH:$HOME/Utilities/sbt/bin"
+fi
 
 if [ -d "/Library/TeX/texbin" -o ]; then
     # El Capitan trick..
