@@ -57,14 +57,17 @@ source $ZSH/oh-my-zsh.sh
 # for brew
 export PATH="$HOME/bin:/usr/local/sbin:/usr/local/games:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
 
-if [ "$(uname -s)" == "Darwin" ]; then
+if [ "$(uname -s)" = "Darwin" ]; then
     export JAVA_HOME=$(/usr/libexec/java_home)
 fi
 
 # android
-export ANDROID_HOME="$HOME/adt-bundle-linux-x86_64-20131030"
-if [ -d "$ANDROID_HOME" ]; then
-    export PATH="$PATH:$ANDROID_HOME/sdk/tools:$ANDROID_HOME/platform-tools"
+#export ANDROID_HOME="$HOME/adt-bundle-linux-x86_64-20131030"
+#if [ -d "$ANDROID_HOME" ]; then
+#    export PATH="$PATH:$ANDROID_HOME/sdk/tools:$ANDROID_HOME/platform-tools"
+#fi
+if [ -d '/usr/local/opt/android-sdk' ]; then
+    export ANDROID_HOME=/usr/local/opt/android-sdk
 fi
 
 # mongo
@@ -137,6 +140,8 @@ fi
 if [ -e "$HOME/Downloads/dsdriver/db2profile" ]; then
    source $HOME/Downloads/dsdriver/db2profile
 fi
+
+# private keys and tokens
 if [ -f "$HOME/.keys" ]; then
     source $HOME/.keys
 fi
@@ -152,3 +157,10 @@ fi
 
 export TERM="xterm-256color"
 setopt interactivecomments
+
+# added by travis gem
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
