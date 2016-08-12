@@ -1,7 +1,7 @@
 set nocompatible
 filetype off
 
-set term=builtin_ansi
+"set term=builtin_ansi
 set t_Co=256
 let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
@@ -9,54 +9,44 @@ let &t_AF="\e[38;5;%dm"
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle
- " required!
- Plugin 'gmarik/Vundle.vim'
-
- " My Plugins here:
- "
- " original repos on github
- Plugin 'tpope/vim-fugitive'
-" Plugin 'Lokaltog/vim-easymotion'
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim'}
-" Plugin 'tpope/vim-rails.git'
-" Plugin 'ack.vim'
-" Plugin 'sjl/badwolf'
- Plugin 'plasticboy/vim-markdown'
- Plugin 'jtratner/vim-flavored-markdown'
-" Plugin 'groenewege/vim-less'
- Plugin 'editorconfig-vim'
- Plugin 'bling/vim-airline'
- Plugin 'airblade/vim-gitgutter'
- Plugin 'kien/ctrlp.vim'
- Plugin 'scrooloose/NERDTree'
- Plugin 'scrooloose/NERDCommenter'
- Plugin 'scrooloose/syntastic'
- Plugin 'Tabular'
- Plugin 'pangloss/vim-javascript'
-" Plugin 'mxw/vim-jsx'
- "Plugin 'leafgarland/typescript-vim'
- Plugin 'Valloric/YouCompleteMe'
- Plugin 'ternjs/tern_for_vim'
- Plugin 'lervag/vimtex'
- Plugin 'klen/python-mode'
- Plugin 'ntpeters/vim-better-whitespace'
- " vim-scripts repos
- Plugin 'obsidian'
- "Plugin '
- " Plugin 'L9'
- " Plugin 'FuzzyFinder'
- " non github repos
+" required!
+Plugin 'gmarik/Vundle.vim'
+" original repos on github
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-sensible'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'jtratner/vim-flavored-markdown'
+Plugin 'bling/vim-airline'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/NERDTree'
+Plugin 'scrooloose/syntastic'
+Plugin 'pangloss/vim-javascript'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'Raimondi/delimitMate'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'lervag/vimtex'
+Plugin 'bitc/vim-bad-whitespace'
+" vim-scripts repos
+" non github repos
 call vundle#end()            " required
 filetype plugin indent on     " required!
 
 "set guifont       = "Menlo:12"
 "let g:colors_name = "badwolf"
-"set background    = "dark"
+set background    = "dark"
 
 set modelines=0
 syntax enable
 set nu
 set ruler
+set autochdir
+
+set background=dark
+
+colorscheme solarized
 
 " remap arrow keys
 "noremap <Down> gj
@@ -73,6 +63,17 @@ set ruler
 " copy
 "vnoremap <C-c> "*y
 
+
+" autocmd
+if has("autocmd")
+    " Enable filetype detection.
+    " Use the default filetype settings, so that mail gets 'tw' set to 72,
+    " 'cindent' is on in C files, etc.
+    " Also load indent files, to automatically do language-dependent indentig.
+    filetype plugin indent on
+endif
+
+
 " Command T settings
 let g:CommandTInputDebounce = 200
 let g:CommandTFileScanner = "watchman"
@@ -86,8 +87,26 @@ let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard']  " Windows
 
+" YCM
+" let g:ycm_add_preview_to_completeopt=0
+" let g:ycm_confirm_extra_conf=0
+" set completeopt-=preview
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
+
+let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+
 " Syntastic
-let g:syntastic_javascript_checkers = ['']
+let g:syntastic_javascript_checkers = ['standard']
+let g:synstatic_check_on_open=1
+
+" Javascript
+autocmd bufwritepost *.js silent !standard-format -w %
+set autoread
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -99,13 +118,12 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 "Some tips from http://stevelosh.com/blog/2010/09/coming-home-to-vim/"
-
 set mouse=a
 
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+"set tabstop=4
 set expandtab
+set shiftwidth=2
+set softtabstop=2
 
 set encoding=utf-8
 set scrolloff=3
@@ -121,6 +139,31 @@ set backspace=indent,eol,start
 set laststatus=2
 " set relativenumber
 set cursorline
+
+
+" Python, PEP-008
+au BufRead,BufNewFile *.py,*.pyw set expandtab
+au BufRead,BufNewFile *.py,*.pyw set textwidth=139
+au BufRead,BufNewFile *.py,*.pyw set tabstop=4
+au BufRead,BufNewFile *.py,*.pyw set softtabstop=4
+au BufRead,BufNewFile *.py,*.pyw set shiftwidth=4
+au BufRead,BufNewFile *.py,*.pyw set autoindent
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /\s\+$/
+au         BufNewFile *.py,*.pyw set fileformat=unix
+au BufRead,BufNewFile *.py,*.pyw let b:comment_leader = '#'
+
+
+" JS, standard
+au BufRead,BufNewFile *.js set expandtab
+au BufRead,BufNewFile *.js set tabstop=2
+au BufRead,BufNewFile *.js set softtabstop=2
+au BufRead,BufNewFile *.js set shiftwidth=2
+au BufRead,BufNewFile *.js set autoindent
+au BufRead,BufNewFile *.js match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.js match BadWhitespace /\s\+$/
+au         BufNewFile *.js set fileformat=unix
+au BufRead,BufNewFile *.js let b:comment_leader = '//'
 
 
 let mapleader = ","
@@ -188,8 +231,8 @@ let g:badwolf_css_props_highlight = 1
 let g:badwolf_html_link_underline = 1
 
 " Airline settings
-let g:airline#extensions#tabline#enabled =1
 let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled =1
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 
