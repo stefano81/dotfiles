@@ -29,6 +29,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'lervag/vimtex'
 Plugin 'bitc/vim-bad-whitespace'
+Plugin 'othree/html5.vim'
 " vim-scripts repos
 " non github repos
 call vundle#end()            " required
@@ -185,12 +186,11 @@ set hlsearch
 nnoremap <leader><space> :noh<cr>
 
 " match the next brace
-nnoremap <tab> %
-vnoremap <tab> %
+"nnoremap <tab> %
+"vnoremap <tab> %
 set wrap
 set formatoptions=qrn1
 set linebreak
-
 " remap movement to move by column layout
 nnoremap j gj
 nnoremap k gk
@@ -247,7 +247,7 @@ augroup file_types
     autocmd BufRead,BufNewFile *.inc set filetype=php
     autocmd BufRead,BufNewFile *.profile set filetype=php
     autocmd BufRead,BufNewFile *.view set filetype=php
-    autocmd BufNewFile,BufRead *.less set filetype=less
+    autocmd BufRead,BufNewFile *.less set filetype=less
     autocmd BufRead,BufNewFile *.js set ft=javascript syntax=javascript
     autocmd BufRead,BufNewFile *.ts set ft=typescript syntax=typescript
     autocmd BufRead,BufNewFile *.es6 set ft=javascript syntax=javascript

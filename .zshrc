@@ -49,7 +49,7 @@ HIST_STAMP="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim)
+plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -151,6 +151,7 @@ autoload -U zmv
 # virtualenv
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
+export VIRTUALENVWRAPPER_PYTHON=$(which python)
 if [ -e "/usr/local/bin/virtualenvwrapper.sh" ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
@@ -162,5 +163,10 @@ setopt interactivecomments
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+
+export HADOOP_HOME=$HOME/Utilities/hadoop
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+
+export SPARK_HOME=$HOME/Utilities/spark
