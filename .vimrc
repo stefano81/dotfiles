@@ -14,10 +14,10 @@ Plugin 'gmarik/Vundle.vim'
 " original repos on github
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'jtratner/vim-flavored-markdown'
-Plugin 'bling/vim-airline'
+"Plugin 'altercation/vim-colors-solarized'
+"Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/NERDTree'
 Plugin 'scrooloose/syntastic'
@@ -37,7 +37,7 @@ filetype plugin indent on     " required!
 
 "set guifont       = "Menlo:12"
 "let g:colors_name = "badwolf"
-set background    = "dark"
+set background    = "light"
 
 set modelines=0
 syntax enable
@@ -47,7 +47,7 @@ set autochdir
 
 set background=dark
 
-colorscheme solarized
+"colorscheme solarized
 
 " remap arrow keys
 "noremap <Down> gj
@@ -83,7 +83,7 @@ let g:CommandTMaxHeight = 30
 let g:CommandTMaxFiles = 500000
 
 " CtrlP settings
-" 
+"
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard']  " Windows
@@ -229,6 +229,12 @@ let g:badwolf_darkgutter = 1
 let g:badwolf_tabline = 2
 let g:badwolf_css_props_highlight = 1
 let g:badwolf_html_link_underline = 1
+
+" Powerline
+set guifont=Inconsolata-g\ for\ Powerline:h11
+let g:Powerline_symbols = 'fancy'
+set t_Co=256
+set fillchars+=stl:\ ,stlnc:\
 
 " Airline settings
 let g:airline_powerline_fonts=1

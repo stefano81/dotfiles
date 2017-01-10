@@ -8,6 +8,7 @@ export ZSH=$HOME/.oh-my-zsh
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="fox"
 ZSH_THEME="kphoen" # my default
+#ZSH_THEME="agnoster"
 #ZSH_THEME="rkj-repos" # not bad
 #ZSH_THEME="random"
 # Uncomment the following line to use case-sensitive completion.
@@ -49,13 +50,13 @@ HIST_STAMP="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes)
+plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes docker)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 # for brew
-export PATH="$HOME/bin:/usr/local/sbin:/usr/local/games:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
+export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
 
 if [ "$(uname -s)" = "Darwin" ]; then
     export JAVA_HOME=$(/usr/libexec/java_home)
@@ -73,11 +74,6 @@ fi
 # mongo
 if [ -d "$HOME/Utilities/mongodb/bin" ]; then
     export PATH="$PATH:$HOME/Utilities/mongodb/bin"
-fi
-
-# idea
-if [ -d "$HOME/Utilities/idea/bin" ]; then
-    export PATH="$PATH:$HOME/Utilities/idea/bin"
 fi
 
 # spark
@@ -101,7 +97,7 @@ if [ -d "/Library/TeX/texbin" -o ]; then
 fi
 
 # You may need to manually set your language environment
-export LANG=en_GB.UTF-8
+export LANG=en_US.utf-8
 
 setopt inc_append_history
 setopt share_history
@@ -111,11 +107,11 @@ setopt histignoredups
 export PIP_REQUIRE_VIRTUALENV=true
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
@@ -135,8 +131,13 @@ export ARCHFLAGS="-arch x86_64"
 # nvm
 if [ -d "$HOME/.nvm" ]; then
     export NVM_DIR=~/.nvm
-    source ~/.nvm/nvm.sh
+    if [ -f "$NVM_DIR"/nvm.sh ]; then
+      source ~/.nvm/nvm.sh
+    elif [ -f "/usr/local/opt/nvm/nvm.sh" ]; then
+      source /usr/local/opt/nvm/nvm.sh
+    fi
 fi
+
 if [ -e "$HOME/Downloads/dsdriver/db2profile" ]; then
    source $HOME/Downloads/dsdriver/db2profile
 fi
@@ -149,6 +150,9 @@ fi
 autoload -U zmv
 
 # virtualenv
+if which pyenv-virtualenv-init > /dev/null; then
+  eval "$(pyenv virtualenv-init -)"
+fi
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
 export VIRTUALENVWRAPPER_PYTHON=$(which python)
@@ -170,3 +174,6 @@ export HADOOP_HOME=$HOME/Utilities/hadoop
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
 export SPARK_HOME=$HOME/Utilities/spark
+
+### Added by the Bluemix CLI
+source /usr/local/Bluemix/bx/zsh_autocomplete
