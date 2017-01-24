@@ -15,10 +15,10 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
 "Plugin 'altercation/vim-colors-solarized'
-"Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
+Plugin 'jreybert/vimagit'
 Plugin 'scrooloose/NERDTree'
 Plugin 'scrooloose/syntastic'
 Plugin 'pangloss/vim-javascript'
@@ -30,6 +30,7 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'lervag/vimtex'
 Plugin 'bitc/vim-bad-whitespace'
 Plugin 'othree/html5.vim'
+Plugin 'JamshedVesuna/vim-markdown-preview'
 " vim-scripts repos
 " non github repos
 call vundle#end()            " required
@@ -106,7 +107,7 @@ let g:syntastic_javascript_checkers = ['standard']
 let g:synstatic_check_on_open=1
 
 " Javascript
-autocmd bufwritepost *.js silent !standard-format -w %
+autocmd bufwritepost *.js silent !standard --fix %
 set autoread
 
 set statusline+=%#warningmsg#
@@ -171,6 +172,8 @@ let mapleader = ","
 
 "Custom settings
 set nofoldenable    " disable folding
+
+" markdown
 let g:vim_markdown_folding_disabled=1
 
 " search remap
