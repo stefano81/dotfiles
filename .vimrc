@@ -37,7 +37,12 @@ call vundle#end()            " required
 filetype plugin indent on     " required!
 
 "set guifont       = "Menlo:12"
-set background    = "light"
+if has('gui_running')
+  set background=light
+else
+  let g:solarized_termcolors=256
+  set background=dark
+endif
 
 set modelines=0
 syntax enable
