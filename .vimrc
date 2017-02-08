@@ -14,7 +14,7 @@ Plugin 'gmarik/Vundle.vim'
 " original repos on github
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
-"Plugin 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
@@ -37,7 +37,6 @@ call vundle#end()            " required
 filetype plugin indent on     " required!
 
 "set guifont       = "Menlo:12"
-"let g:colors_name = "badwolf"
 set background    = "light"
 
 set modelines=0
@@ -46,9 +45,7 @@ set nu
 set ruler
 set autochdir
 
-set background=dark
-
-"colorscheme solarized
+colorscheme solarized
 
 " remap arrow keys
 "noremap <Down> gj
@@ -220,18 +217,6 @@ nnoremap gy :bnext<CR>
 nnoremap gt :bprevious<cr>
 nnoremap gd :bdelete<cr>
 nnoremap <leader>bl :ls<CR>
-
-" Theme stuff
-nnoremap <leader>1 :colorscheme obsidian<cr>
-nnoremap <leader>2 :colorscheme tomorrow-night-bright<cr>
-nnoremap <leader>3 :colorscheme molokai<cr>
-nnoremap <leader>4 :colorscheme badwolf<cr>
-
-" badwolf settings
-let g:badwolf_darkgutter = 1
-let g:badwolf_tabline = 2
-let g:badwolf_css_props_highlight = 1
-let g:badwolf_html_link_underline = 1
 
 " Powerline
 set guifont=Inconsolata-g\ for\ Powerline:h11

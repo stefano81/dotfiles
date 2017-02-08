@@ -78,8 +78,11 @@ fi
 
 # spark
 if [ -d "$HOME/Utilities/spark/bin" ]; then
-    export PATH="$PATH:$HOME/Utilities/spark/bin"
+    export SPARK_HOME=$HOME/Utilities/spark
+elif [ -d "/usr/local/Cellar/apache-spark@1.6" ]; then
+    export SPARK_HOME="/usr/local/opt/apache-spark@1.6"
 fi
+export PATH="$PATH:$SPARK_HOME/bin"
 
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -173,7 +176,6 @@ setopt interactivecomments
 export HADOOP_HOME=$HOME/Utilities/hadoop
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
-export SPARK_HOME=$HOME/Utilities/spark
 
 ### Added by the Bluemix CLI
 source /usr/local/Bluemix/bx/zsh_autocomplete
