@@ -60,36 +60,26 @@ export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/
 
 if [ "$(uname -s)" = "Darwin" ]; then
     export JAVA_HOME=$(/usr/libexec/java_home)
+    export PATH=$JAVA_HOME:$PATH
 fi
 
 # android
 #export ANDROID_HOME="$HOME/adt-bundle-linux-x86_64-20131030"
-#if [ -d "$ANDROID_HOME" ]; then
-#    export PATH="$PATH:$ANDROID_HOME/sdk/tools:$ANDROID_HOME/platform-tools"
-#fi
 if [ -d '/usr/local/opt/android-sdk' ]; then
     export ANDROID_HOME=/usr/local/opt/android-sdk
 fi
-
-# mongo
-if [ -d "$HOME/Utilities/mongodb/bin" ]; then
-    export PATH="$PATH:$HOME/Utilities/mongodb/bin"
+if [ -d "$ANDROID_HOME" ]; then
+    export PATH="$PATH:$ANDROID_HOME/sdk/tools:$ANDROID_HOME/platform-tools"
 fi
 
 # spark
-if [ -d "$HOME/Utilities/spark/bin" ]; then
-    export SPARK_HOME=$HOME/Utilities/spark
-elif [ -d "/usr/local/Cellar/apache-spark@1.6" ]; then
+if [ -d "/usr/local/Cellar/apache-spark@1.6" ]; then
     export SPARK_HOME="/usr/local/opt/apache-spark@1.6"
 fi
 export PATH="$PATH:$SPARK_HOME/bin"
 
 export MANPATH="/usr/local/man:$MANPATH"
 
-if [ -d "$HOME/Utilities/scala" ]; then
-    export SCALA_HOME="$HOME/Utilities/scala"
-    export PATH="$PATH:$SCALA_HOME/bin"
-fi
 if [ -d "$HOME/Utilities/sbt" ]; then
     export PATH="$PATH:$HOME/Utilities/sbt/bin"
 fi
@@ -127,10 +117,6 @@ export ARCHFLAGS="-arch x86_64"
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
 # nvm
 if [ -d "$HOME/.nvm" ]; then
     export NVM_DIR=~/.nvm
@@ -141,9 +127,9 @@ if [ -d "$HOME/.nvm" ]; then
     fi
 fi
 
-if [ -e "$HOME/Downloads/dsdriver/db2profile" ]; then
-   source $HOME/Downloads/dsdriver/db2profile
-fi
+# if [ -e "$HOME/Downloads/dsdriver/db2profile" ]; then
+#    source $HOME/Downloads/dsdriver/db2profile
+# fi
 
 # private keys and tokens
 if [ -f "$HOME/.keys" ]; then
@@ -179,3 +165,6 @@ export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
 ### Added by the Bluemix CLI
 source /usr/local/Bluemix/bx/zsh_autocomplete
+
+# added by travis gem
+[ -f /Users/stefano/.travis/travis.sh ] && source /Users/stefano/.travis/travis.sh

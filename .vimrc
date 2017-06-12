@@ -20,7 +20,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jreybert/vimagit'
 Plugin 'scrooloose/NERDTree'
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'nathanaelkane/vim-indent-guides'
@@ -31,6 +31,8 @@ Plugin 'lervag/vimtex'
 Plugin 'bitc/vim-bad-whitespace'
 Plugin 'othree/html5.vim'
 Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'ensime/ensime-vim'
 " vim-scripts repos
 " non github repos
 call vundle#end()            " required
@@ -38,7 +40,7 @@ filetype plugin indent on     " required!
 
 "set guifont       = "Menlo:12"
 if has('gui_running')
-  set background=light
+  set background=dark
 else
   let g:solarized_termcolors=256
   set background=dark
@@ -116,12 +118,16 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
 
 " Javascript
-autocmd bufwritepost *.js silent !standard --fix %
+autocmd BufWritePost *.js silent !standard --fix %
 set autoread
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+" Scala
+autocmd BufWritePost *.scala silent :EnTypeCheck
+nnoremap <localleader>t :EnTypeCheck<CR>
 
 
 "Some tips from http://stevelosh.com/blog/2010/09/coming-home-to-vim/"
@@ -171,7 +177,6 @@ au BufRead,BufNewFile *.js match BadWhitespace /^\t\+/
 au BufRead,BufNewFile *.js match BadWhitespace /\s\+$/
 au         BufNewFile *.js set fileformat=unix
 au BufRead,BufNewFile *.js let b:comment_leader = '//'
-
 
 let mapleader = ","
 
@@ -257,6 +262,8 @@ augroup file_types
     autocmd BufRead,BufNewFile *.twig set ft=htmldjango
     autocmd BufRead,BufNewFile *.rabl set ft=ruby
     autocmd BufRead,BufNewFile *.jade set ft=jade
+    autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex spelllang=en_US
+    autocmd BufRead,BufNewFile *.scala set filetype=scala
 augroup END
 
 " Whitespace fixes
