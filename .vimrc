@@ -12,25 +12,31 @@ call vundle#begin()
 " required!
 Plugin 'gmarik/Vundle.vim'
 " original repos on github
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-sensible'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
-Plugin 'jreybert/vimagit'
-Plugin 'scrooloose/NERDTree'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-sensible'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'bitc/vim-bad-whitespace'
+Plugin 'nathanaelkane/vim-indent-guides'
+" Plugin 'jreybert/vimagit'
+" Plugin 'scrooloose/NERDTree'
+" python
+Plugin 'python-mode/python-mode'
+Plugin 'jmcantrell/vim-virtualenv'
+" javascript
 Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
-Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Raimondi/delimitMate'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'sheerun/vim-polyglot'
 Plugin 'lervag/vimtex'
-Plugin 'bitc/vim-bad-whitespace'
+
 Plugin 'othree/html5.vim'
-Plugin 'JamshedVesuna/vim-markdown-preview'
+" Plugin 'JamshedVesuna/vim-markdown-preview'
+
 Plugin 'derekwyatt/vim-scala'
 Plugin 'ensime/ensime-vim'
 " vim-scripts repos
@@ -105,6 +111,7 @@ let g:ycm_complete_in_strings = 1 " Completion in string
 
 let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+let g:ycm_show_diagnotics_ui = 0
 
 " Syntastic
 let g:syntastic_javascript_checkers = ['standard']
@@ -165,6 +172,7 @@ au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
 au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /\s\+$/
 au         BufNewFile *.py,*.pyw set fileformat=unix
 au BufRead,BufNewFile *.py,*.pyw let b:comment_leader = '#'
+let g:pymode_link_on_write = 0
 
 
 " JS, standard
@@ -219,10 +227,10 @@ nnoremap <leader>v V`]
 "Window splitting remap"
 nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <leader>q <C-w>s<C-w>j
-nnoremap <C-h> <C-w>h
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-j> <C-w>j
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
+" nnoremap <C-j> <C-w>j
 
 " Buffers
 nnoremap <leader>T :enew<cr>

@@ -73,10 +73,10 @@ if [ -d "$ANDROID_HOME" ]; then
 fi
 
 # spark
-if [ -d "/usr/local/Cellar/apache-spark@1.6" ]; then
-    export SPARK_HOME="/usr/local/opt/apache-spark@1.6"
-fi
-export PATH="$PATH:$SPARK_HOME/bin"
+# if [ -d "/usr/local/Cellar/apache-spark@2.6" ]; then
+#     export SPARK_HOME="/usr/local/opt/apache-spark@1.6"
+# fi
+# export PATH="$PATH:$SPARK_HOME/bin"
 
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -159,9 +159,10 @@ setopt interactivecomments
 # eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 
-export HADOOP_HOME=$HOME/Utilities/hadoop
-export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
-
+if [ -d $HOME/Utilities/hadoop ]; then
+  export HADOOP_HOME=$HOME/Utilities/hadoop
+  export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+fi
 
 ### Added by the Bluemix CLI
 source /usr/local/Bluemix/bx/zsh_autocomplete
