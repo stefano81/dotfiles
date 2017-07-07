@@ -60,6 +60,11 @@ set autochdir
 
 colorscheme solarized
 
+" copy
+"vnoremap <C-c> "*y
+" add $ at the end of a changed region
+set cpoptions+=$
+
 " autocmd
 if has("autocmd")
   " Enable filetype detection.
