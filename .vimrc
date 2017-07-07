@@ -12,6 +12,8 @@ call vundle#begin()
 " required!
 Plugin 'gmarik/Vundle.vim'
 " original repos on github
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -23,8 +25,6 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'bitc/vim-bad-whitespace'
 Plugin 'nathanaelkane/vim-indent-guides'
-" Plugin 'jreybert/vimagit'
-" Plugin 'scrooloose/NERDTree'
 " python
 Plugin 'python-mode/python-mode'
 Plugin 'jmcantrell/vim-virtualenv'
@@ -35,10 +35,10 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'lervag/vimtex'
 
 Plugin 'othree/html5.vim'
-" Plugin 'JamshedVesuna/vim-markdown-preview'
 
 Plugin 'derekwyatt/vim-scala'
 Plugin 'ensime/ensime-vim'
+Plugin 'derekwyatt/vim-sbt'
 " vim-scripts repos
 " non github repos
 call vundle#end()            " required
@@ -60,31 +60,14 @@ set autochdir
 
 colorscheme solarized
 
-" remap arrow keys
-"noremap <Down> gj
-"noremap <Up> gk
-"nnoremap <Left> h
-"nnoremap <Right> l
-"nnoremap <Up> k
-"nnoremap <Down> j
-"inoremap <up> k
-"inoremap <down> j
-"inoremap <left> h
-"inoremap <right> l
-
-" copy
-"vnoremap <C-c> "*y
-
-
 " autocmd
 if has("autocmd")
-    " Enable filetype detection.
-    " Use the default filetype settings, so that mail gets 'tw' set to 72,
-    " 'cindent' is on in C files, etc.
-    " Also load indent files, to automatically do language-dependent indentig.
-    filetype plugin indent on
+  " Enable filetype detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indentig.
+  filetype plugin indent on
 endif
-
 
 " Command T settings
 let g:CommandTInputDebounce = 200
@@ -95,8 +78,10 @@ let g:CommandTMaxFiles = 500000
 
 " CtrlP settings
 "
-let g:ctrlp_map = '<leader>t'
-let g:ctrlp_cmd = 'CtrlP'
+if has("gui_macvim")
+  let g:ctrlp_map = '<D-p>'
+  let g:ctrlp_cmd = 'CtrlP'
+endif
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard']  " Windows
 
 " YCM
@@ -133,8 +118,10 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 " Scala
-autocmd BufWritePost *.scala silent :EnTypeCheck
-nnoremap <localleader>t :EnTypeCheck<CR>
+let ensime_server_v2=1
+let g:scala_use_default_keymappings = 1
+au FileType scala nnoremap <localleader>df :EnDeclaration<CR>
+au FileType scala nnoremap <localleader>t :EnTypeCheck<CR>
 
 
 "Some tips from http://stevelosh.com/blog/2010/09/coming-home-to-vim/"
@@ -189,7 +176,7 @@ au BufRead,BufNewFile *.js let b:comment_leader = '//'
 let mapleader = ","
 
 "Custom settings
-set nofoldenable    " disable folding
+"set nofoldenable    " disable folding
 
 " markdown
 let g:vim_markdown_folding_disabled=1
@@ -213,8 +200,8 @@ set wrap
 set formatoptions=qrn1
 set linebreak
 " remap movement to move by column layout
-nnoremap j gj
-nnoremap k gk
+"nnoremap j gj
+"nnoremap k gk
 
 "User customizations"
 
@@ -233,7 +220,7 @@ nnoremap <leader>q <C-w>s<C-w>j
 " nnoremap <C-j> <C-w>j
 
 " Buffers
-nnoremap <leader>T :enew<cr>
+"nnoremap <leader>T :enew<cr>
 nnoremap gy :bnext<CR>
 nnoremap gt :bprevious<cr>
 nnoremap gd :bdelete<cr>
@@ -249,29 +236,29 @@ set fillchars+=stl:\ ,stlnc:\
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled =1
 nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
 
 augroup file_types
-    autocmd!
-    autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
-    autocmd BufRead,BufNewFile *.md set filetype=markdown
-    autocmd BufRead,BufNewFile *.txt set filetype=markdown
-    autocmd BufRead,BufNewFile *.module set filetype=php
-    autocmd BufRead,BufNewFile *.install set filetype=php
-    autocmd BufRead,BufNewFile *.test set filetype=php
-    autocmd BufRead,BufNewFile *.inc set filetype=php
-    autocmd BufRead,BufNewFile *.profile set filetype=php
-    autocmd BufRead,BufNewFile *.view set filetype=php
-    autocmd BufRead,BufNewFile *.less set filetype=less
-    autocmd BufRead,BufNewFile *.js set ft=javascript syntax=javascript
-    autocmd BufRead,BufNewFile *.ts set ft=typescript syntax=typescript
-    autocmd BufRead,BufNewFile *.es6 set ft=javascript syntax=javascript
-    autocmd BufRead,BufNewFile *.json set ft=json syntax=javascript
-    autocmd BufRead,BufNewFile *.twig set ft=htmldjango
-    autocmd BufRead,BufNewFile *.rabl set ft=ruby
-    autocmd BufRead,BufNewFile *.jade set ft=jade
-    autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex spelllang=en_US
-    autocmd BufRead,BufNewFile *.scala set filetype=scala
+  autocmd!
+  autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+  autocmd BufRead,BufNewFile *.txt set filetype=markdown
+  autocmd BufRead,BufNewFile *.module set filetype=php
+  autocmd BufRead,BufNewFile *.install set filetype=php
+  autocmd BufRead,BufNewFile *.test set filetype=php
+  autocmd BufRead,BufNewFile *.inc set filetype=php
+  autocmd BufRead,BufNewFile *.profile set filetype=php
+  autocmd BufRead,BufNewFile *.view set filetype=php
+  autocmd BufRead,BufNewFile *.less set filetype=less
+  autocmd BufRead,BufNewFile *.js set ft=javascript syntax=javascript
+  autocmd BufRead,BufNewFile *.ts set ft=typescript syntax=typescript
+  autocmd BufRead,BufNewFile *.es6 set ft=javascript syntax=javascript
+  autocmd BufRead,BufNewFile *.json set ft=json syntax=javascript
+  autocmd BufRead,BufNewFile *.twig set ft=htmldjango
+  autocmd BufRead,BufNewFile *.rabl set ft=ruby
+  autocmd BufRead,BufNewFile *.jade set ft=jade
+  autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex spelllang=en_US
+  autocmd BufRead,BufNewFile *.scala set filetype=scala
+  autocmd BufRead,BufNewFile *.sbt set filetype=sbt
 augroup END
 
 " Whitespace fixes
@@ -301,13 +288,13 @@ nnoremap <leader>a: :Tabularize /:\zs<CR>
 vnoremap <leader>a: :Tabularize /:\zs<CR>
 
 " Custom maps
-set pastetoggle=<leader>p
-nnoremap <leader>m :w <BAR> !lessc % > %:t:r.css<CR><space>
+"set pastetoggle=<leader>p
+"nnoremap <leader>m :w <BAR> !lessc % > %:t:r.css<CR><space>
 
-nnoremap <leader>vi :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-vnoremap <leader>" <esc>`<i"<esc>`>a"<esc>
-nnoremap <leader>re gg=G
+"nnoremap <leader>vi :vsplit $MYVIMRC<cr>
+"nnoremap <leader>sv :source $MYVIMRC<cr>
+"vnoremap <leader>" <esc>`<i"<esc>`>a"<esc>
+"nnoremap <leader>re gg=G
 
 " Save
 noremap  <silent> <C-S> :update<CR>
@@ -337,7 +324,7 @@ set fileformats=unix,dos
 
 " Abbreviations
 "augroup abbreviations
-    "autocmd!
-    "autocmd FileType html :iabbrev <buffer> --- &mdash;
-    "autocmd FileType javascript :iabbrev <buffer> ret return
+"autocmd!
+"autocmd FileType html :iabbrev <buffer> --- &mdash;
+"autocmd FileType javascript :iabbrev <buffer> ret return
 "augroup END

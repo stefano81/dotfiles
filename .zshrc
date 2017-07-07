@@ -7,8 +7,8 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="fox"
-ZSH_THEME="kphoen" # my default
-#ZSH_THEME="agnoster"
+#ZSH_THEME="kphoen" # my default
+ZSH_THEME="agnoster"
 #ZSH_THEME="rkj-repos" # not bad
 #ZSH_THEME="random"
 # Uncomment the following line to use case-sensitive completion.
@@ -50,7 +50,8 @@ HIST_STAMP="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes docker)
+#plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes docker)
+plugins=(zsh_reload scala sbt colored-man-pages)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -72,11 +73,6 @@ if [ -d "$ANDROID_HOME" ]; then
     export PATH="$PATH:$ANDROID_HOME/sdk/tools:$ANDROID_HOME/platform-tools"
 fi
 
-# spark
-# if [ -d "/usr/local/Cellar/apache-spark@2.6" ]; then
-#     export SPARK_HOME="/usr/local/opt/apache-spark@1.6"
-# fi
-# export PATH="$PATH:$SPARK_HOME/bin"
 
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -127,10 +123,6 @@ if [ -d "$HOME/.nvm" ]; then
     fi
 fi
 
-# if [ -e "$HOME/Downloads/dsdriver/db2profile" ]; then
-#    source $HOME/Downloads/dsdriver/db2profile
-# fi
-
 # private keys and tokens
 if [ -f "$HOME/.keys" ]; then
     source $HOME/.keys
@@ -155,17 +147,10 @@ setopt interactivecomments
 # added by travis gem
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
+export HADOOP_HOME=/usr/local/Cellar/hadoop/2.8.0/libexec
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
-
-if [ -d $HOME/Utilities/hadoop ]; then
-  export HADOOP_HOME=$HOME/Utilities/hadoop
-  export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
-fi
+#$(brew info apache-spark | grep '*' | cut -f1 -d\ )/bin/load-spark-env.sh
 
 ### Added by the Bluemix CLI
 source /usr/local/Bluemix/bx/zsh_autocomplete
-
-# added by travis gem
-[ -f /Users/stefano/.travis/travis.sh ] && source /Users/stefano/.travis/travis.sh
