@@ -33,6 +33,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'Raimondi/delimitMate'
 Plugin 'lervag/vimtex'
+Plugin 'lilydjwg/colorizer'
 
 Plugin 'othree/html5.vim'
 
@@ -60,8 +61,6 @@ set autochdir
 
 colorscheme solarized
 
-" copy
-"vnoremap <C-c> "*y
 " add $ at the end of a changed region
 set cpoptions+=$
 
@@ -83,10 +82,8 @@ let g:CommandTMaxFiles = 500000
 
 " CtrlP settings
 "
-if has("gui_macvim")
-  let g:ctrlp_map = '<D-p>'
-  let g:ctrlp_cmd = 'CtrlP'
-endif
+let g:ctrlp_map = '<C-p>'
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard']  " Windows
 
 " YCM
@@ -114,20 +111,6 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
 
-" Javascript
-autocmd BufWritePost *.js silent !standard --fix %
-set autoread
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-" Scala
-let ensime_server_v2=1
-let g:scala_use_default_keymappings = 1
-au FileType scala nnoremap <localleader>df :EnDeclaration<CR>
-au FileType scala nnoremap <localleader>t :EnTypeCheck<CR>
-
 
 "Some tips from http://stevelosh.com/blog/2010/09/coming-home-to-vim/"
 set mouse=a
@@ -149,34 +132,10 @@ set visualbell
 set ttyfast
 set backspace=indent,eol,start
 set laststatus=2
-" set relativenumber
+set relativenumber
+set number
 set cursorline
 
-
-" Python, PEP-008
-au BufRead,BufNewFile *.py,*.pyw set expandtab
-au BufRead,BufNewFile *.py,*.pyw set textwidth=139
-au BufRead,BufNewFile *.py,*.pyw set tabstop=4
-au BufRead,BufNewFile *.py,*.pyw set softtabstop=4
-au BufRead,BufNewFile *.py,*.pyw set shiftwidth=4
-au BufRead,BufNewFile *.py,*.pyw set autoindent
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /\s\+$/
-au         BufNewFile *.py,*.pyw set fileformat=unix
-au BufRead,BufNewFile *.py,*.pyw let b:comment_leader = '#'
-let g:pymode_link_on_write = 0
-
-
-" JS, standard
-au BufRead,BufNewFile *.js set expandtab
-au BufRead,BufNewFile *.js set tabstop=2
-au BufRead,BufNewFile *.js set softtabstop=2
-au BufRead,BufNewFile *.js set shiftwidth=2
-au BufRead,BufNewFile *.js set autoindent
-au BufRead,BufNewFile *.js match BadWhitespace /^\t\+/
-au BufRead,BufNewFile *.js match BadWhitespace /\s\+$/
-au         BufNewFile *.js set fileformat=unix
-au BufRead,BufNewFile *.js let b:comment_leader = '//'
 
 let mapleader = ","
 
@@ -287,19 +246,10 @@ set nobackup
 nnoremap ; :
 
 " Tabular
-nnoremap <leader>a= :Tabularize /=<CR>
-vnoremap <leader>a= :Tabularize /=<CR>
-nnoremap <leader>a: :Tabularize /:\zs<CR>
-vnoremap <leader>a: :Tabularize /:\zs<CR>
-
-" Custom maps
-"set pastetoggle=<leader>p
-"nnoremap <leader>m :w <BAR> !lessc % > %:t:r.css<CR><space>
-
-"nnoremap <leader>vi :vsplit $MYVIMRC<cr>
-"nnoremap <leader>sv :source $MYVIMRC<cr>
-"vnoremap <leader>" <esc>`<i"<esc>`>a"<esc>
-"nnoremap <leader>re gg=G
+" nnoremap <leader>a= :Tabularize /=<CR>
+" vnoremap <leader>a= :Tabularize /=<CR>
+" nnoremap <leader>a: :Tabularize /:\zs<CR>
+" vnoremap <leader>a: :Tabularize /:\zs<CR>
 
 " Save
 noremap  <silent> <C-S> :update<CR>
@@ -307,25 +257,56 @@ vnoremap <silent> <C-S> <C-C>:update<CR>
 inoremap <silent> <C-S> <C-O>:update<CR>
 
 " Abbreviations
-iabbrev adn and
-iabbrev waht what
+" iabbrev waht what
 nnoremap H 00
 nnoremap L $
-inoremap jk <esc>
-
-" Arrow keys
-"nnoremap <left> <nop>
-"nnoremap <right> <nop>
-"nnoremap <up> <nop>
-"nnoremap <down> <nop>
-"
-"inoremap <left> <nop>
-"inoremap <right> <nop>
-"inoremap <up> <nop>
-"inoremap <down> <nop>
+" inoremap jk <esc>
 
 set fileformat=unix
 set fileformats=unix,dos
+
+" Javascript
+autocmd BufWritePost *.js silent !standard --fix %
+set autoread
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" Scala
+let ensime_server_v2=1
+let g:scala_use_default_keymappings = 1
+au FileType scala nnoremap <localleader>df :EnDeclaration<CR>
+au FileType scala nnoremap <localleader>t :EnTypeCheck<CR>
+au BufRead,BufNewFile *.scala match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.scala match BadWhitespace /\s\+$/
+au         BufNewFile *.scala set fileformat=unix
+au BufRead,BufNewFile *.scala let b:comment_leader = '//'
+au BufWritePost *.scala silent :EnTypeCheck<CR>
+
+" Python, PEP-008
+au BufRead,BufNewFile *.py,*.pyw set expandtab
+au BufRead,BufNewFile *.py,*.pyw set textwidth=139
+au BufRead,BufNewFile *.py,*.pyw set tabstop=4
+au BufRead,BufNewFile *.py,*.pyw set softtabstop=4
+au BufRead,BufNewFile *.py,*.pyw set shiftwidth=4
+au BufRead,BufNewFile *.py,*.pyw set autoindent
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /\s\+$/
+au         BufNewFile *.py,*.pyw set fileformat=unix
+au BufRead,BufNewFile *.py,*.pyw let b:comment_leader = '#'
+let g:pymode_link_on_write = 0
+
+" JS, standard
+au BufRead,BufNewFile *.js set expandtab
+au BufRead,BufNewFile *.js set tabstop=2
+au BufRead,BufNewFile *.js set softtabstop=2
+au BufRead,BufNewFile *.js set shiftwidth=2
+au BufRead,BufNewFile *.js set autoindent
+au BufRead,BufNewFile *.js match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.js match BadWhitespace /\s\+$/
+au         BufNewFile *.js set fileformat=unix
+au BufRead,BufNewFile *.js let b:comment_leader = '//'
 
 " Abbreviations
 "augroup abbreviations
