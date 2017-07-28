@@ -31,15 +31,16 @@ Plugin 'jmcantrell/vim-virtualenv'
 " javascript
 Plugin 'pangloss/vim-javascript'
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'mxw/vim-jsx'
 Plugin 'Raimondi/delimitMate'
 Plugin 'lervag/vimtex'
 Plugin 'lilydjwg/colorizer'
 
 Plugin 'othree/html5.vim'
-
-Plugin 'derekwyatt/vim-scala'
-Plugin 'ensime/ensime-vim'
-Plugin 'derekwyatt/vim-sbt'
+" scala
+" Plugin 'derekwyatt/vim-scala'
+" Plugin 'ensime/ensime-vim'
+" Plugin 'derekwyatt/vim-sbt'
 " vim-scripts repos
 " non github repos
 call vundle#end()            " required
@@ -99,6 +100,10 @@ let g:ycm_complete_in_strings = 1 " Completion in string
 let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
 let g:ycm_show_diagnotics_ui = 0
+let g:ycm_filetype_blacklist = {}
+let g:ycm_filetype_blacklist = {
+  \ 'scala' : 1
+\}
 
 " Syntastic
 let g:syntastic_javascript_checkers = ['standard']
@@ -110,6 +115,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
+
+" Javascript
+let g:jsx_ext_required = 0
 
 
 "Some tips from http://stevelosh.com/blog/2010/09/coming-home-to-vim/"
@@ -135,7 +143,6 @@ set laststatus=2
 set relativenumber
 set number
 set cursorline
-
 
 let mapleader = ","
 
@@ -222,20 +229,21 @@ augroup file_types
   autocmd BufRead,BufNewFile *.jade set ft=jade
   autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex spelllang=en_US
   autocmd BufRead,BufNewFile *.scala set filetype=scala
-  autocmd BufRead,BufNewFile *.sbt set filetype=sbt
+  autocmd BufRead,BufNewFile *.sbt set filetype=sbt.scala
 augroup END
 
 " Whitespace fixes
-"highlight ExtraWhitespace ctansiermbg=red guibg=red
-"match ExtraWhitespace /\s\+$/
+" highlight ExtraWhitespace ctansiermbg=red guibg=red
+" match ExtraWhitespace /\s\+$/
 
-"augroup whitespace
-"    autocmd!
-"    autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-"    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-"    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-"    autocmd BufWinLeave * call clearmatches()
-"augroup END
+" augroup whitespace
+"     autocmd!
+"     autocmd BufWinEnter * match BadWhitespace /\s\+$/
+"     autocmd InsertEnter * match BadWhitespace /\s\+\%#\@<!$/
+"     autocmd InsertLeave * match BadWhitespace /\s\+$/
+"     autocmd BufRead,BufNewFile * match BadWhitespace /^\t\+/
+"     autocmd BufWinLeave * call clearmatches()
+" augroup END
 
 set undolevels=20
 set title
@@ -258,9 +266,9 @@ inoremap <silent> <C-S> <C-O>:update<CR>
 
 " Abbreviations
 " iabbrev waht what
-nnoremap H 00
-nnoremap L $
-" inoremap jk <esc>
+" nnoremap H 00
+" nnoremap L $
+inoremap jk <esc>
 
 set fileformat=unix
 set fileformats=unix,dos
@@ -276,13 +284,11 @@ set statusline+=%*
 " Scala
 let ensime_server_v2=1
 let g:scala_use_default_keymappings = 1
-au FileType scala nnoremap <localleader>df :EnDeclaration<CR>
-au FileType scala nnoremap <localleader>t :EnTypeCheck<CR>
-au BufRead,BufNewFile *.scala match BadWhitespace /^\t\+/
-au BufRead,BufNewFile *.scala match BadWhitespace /\s\+$/
-au         BufNewFile *.scala set fileformat=unix
+" au FileType scala nnoremap <localleader>df :EnDeclaration<CR>
+" au FileType scala nnoremap <localleader>t :EnTypeCheck<CR>
+" au         BufNewFile *.scala set fileformat=unix
 au BufRead,BufNewFile *.scala let b:comment_leader = '//'
-au BufWritePost *.scala silent :EnTypeCheck<CR>
+" au BufWritePost *.scala silent :EnTypeCheck
 
 " Python, PEP-008
 au BufRead,BufNewFile *.py,*.pyw set expandtab
@@ -291,8 +297,6 @@ au BufRead,BufNewFile *.py,*.pyw set tabstop=4
 au BufRead,BufNewFile *.py,*.pyw set softtabstop=4
 au BufRead,BufNewFile *.py,*.pyw set shiftwidth=4
 au BufRead,BufNewFile *.py,*.pyw set autoindent
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /\s\+$/
 au         BufNewFile *.py,*.pyw set fileformat=unix
 au BufRead,BufNewFile *.py,*.pyw let b:comment_leader = '#'
 let g:pymode_link_on_write = 0
@@ -303,14 +307,12 @@ au BufRead,BufNewFile *.js set tabstop=2
 au BufRead,BufNewFile *.js set softtabstop=2
 au BufRead,BufNewFile *.js set shiftwidth=2
 au BufRead,BufNewFile *.js set autoindent
-au BufRead,BufNewFile *.js match BadWhitespace /^\t\+/
-au BufRead,BufNewFile *.js match BadWhitespace /\s\+$/
 au         BufNewFile *.js set fileformat=unix
 au BufRead,BufNewFile *.js let b:comment_leader = '//'
 
 " Abbreviations
-"augroup abbreviations
-"autocmd!
-"autocmd FileType html :iabbrev <buffer> --- &mdash;
-"autocmd FileType javascript :iabbrev <buffer> ret return
-"augroup END
+augroup abbreviations
+  autocmd!
+  autocmd FileType html :iabbrev <buffer> --- &mdash;
+  autocmd FileType javascript :iabbrev <buffer> ret return
+augroup END
