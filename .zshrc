@@ -4,11 +4,11 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="robbyrussell"
+# time that oh-my-zsh is loaded
+ZSH_THEME="robbyrussell"
 #ZSH_THEME="fox"
 #ZSH_THEME="kphoen" # my default
-ZSH_THEME="agnoster"
+#ZSH_THEME="agnoster"
 #ZSH_THEME="rkj-repos" # not bad
 #ZSH_THEME="random"
 # Uncomment the following line to use case-sensitive completion.
@@ -51,7 +51,7 @@ HIST_STAMP="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes docker)
-plugins=(zsh_reload scala colored-man-pages)
+plugins=(zsh_reload scala colored-man-pages docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -96,11 +96,11 @@ setopt histignoredups
 export PIP_REQUIRE_VIRTUALENV=true
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
@@ -129,6 +129,9 @@ if [ -f "$HOME/.keys" ]; then
 fi
 
 autoload -U zmv
+autoload -Uz vcs_info
+
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # virtualenv
 if which pyenv-virtualenv-init > /dev/null; then
@@ -152,5 +155,10 @@ export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
 #$(brew info apache-spark | grep '*' | cut -f1 -d\ )/bin/load-spark-env.sh
 
+
 ### Added by the Bluemix CLI
 source /usr/local/Bluemix/bx/zsh_autocomplete
+
+# tabtab source for jhipster package
+# uninstall by removing these lines or running `tabtab uninstall jhipster`
+#[[ -f /Users/stefano/.nvm/versions/node/v8.4.0/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zsh ]] && . /Users/stefano/.nvm/versions/node/v8.4.0/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zshexport

@@ -1,6 +1,8 @@
 set nocompatible
 filetype off
 
+set clipboard=unnamed
+
 "set term=builtin_ansi
 set t_Co=256
 let &t_AB="\e[48;5;%dm"
@@ -29,13 +31,20 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'python-mode/python-mode'
 Plugin 'jmcantrell/vim-virtualenv'
 " javascript
-Plugin 'pangloss/vim-javascript'
-Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'jelera/vim-javascript-syntax'
 Plugin 'mxw/vim-jsx'
-Plugin 'Raimondi/delimitMate'
-Plugin 'lervag/vimtex'
+" Plugin 'isRuslan/vim-es6'
+" Plugin 'Raimondi/delimitMate'
+" Plugin 'lervag/vimtex'
+Plugin 'elzr/vim-json'
+
 Plugin 'lilydjwg/colorizer'
 
+"
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'tomtom/tlib_vim'
+" Plugin 'garbas/vim-snipmate'
+"
 Plugin 'othree/html5.vim'
 " scala
 " Plugin 'derekwyatt/vim-scala'
@@ -117,8 +126,11 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
 
 " Javascript
+autocmd BufWritePost *.js silent !standard --fix %
 let g:jsx_ext_required = 0
+" let g:jsx_pragma_required = 1
 
+set autoread
 
 "Some tips from http://stevelosh.com/blog/2010/09/coming-home-to-vim/"
 set mouse=a
@@ -148,6 +160,7 @@ let mapleader = ","
 
 "Custom settings
 "set nofoldenable    " disable folding
+
 
 " markdown
 let g:vim_markdown_folding_disabled=1
@@ -273,9 +286,6 @@ inoremap jk <esc>
 set fileformat=unix
 set fileformats=unix,dos
 
-" Javascript
-autocmd BufWritePost *.js silent !standard --fix %
-set autoread
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
