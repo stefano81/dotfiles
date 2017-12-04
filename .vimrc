@@ -41,15 +41,7 @@ Plugin 'elzr/vim-json'
 Plugin 'lilydjwg/colorizer'
 
 "
-" Plugin 'MarcWeber/vim-addon-mw-utils'
-" Plugin 'tomtom/tlib_vim'
-" Plugin 'garbas/vim-snipmate'
-"
 Plugin 'othree/html5.vim'
-" scala
-" Plugin 'derekwyatt/vim-scala'
-" Plugin 'ensime/ensime-vim'
-" Plugin 'derekwyatt/vim-sbt'
 " vim-scripts repos
 " non github repos
 call vundle#end()            " required
@@ -110,9 +102,6 @@ let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
 let g:ycm_show_diagnotics_ui = 0
 let g:ycm_filetype_blacklist = {}
-let g:ycm_filetype_blacklist = {
-  \ 'scala' : 1
-\}
 
 " Syntastic
 let g:syntastic_javascript_checkers = ['standard']
@@ -194,14 +183,6 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Select pasted text
 nnoremap <leader>v V`]
-
-"Window splitting remap"
-nnoremap <leader>w <C-w>v<C-w>l
-nnoremap <leader>q <C-w>s<C-w>j
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
-" nnoremap <C-j> <C-w>j
 
 " Buffers
 "nnoremap <leader>T :enew<cr>
@@ -286,19 +267,9 @@ inoremap jk <esc>
 set fileformat=unix
 set fileformats=unix,dos
 
-
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-" Scala
-let ensime_server_v2=1
-let g:scala_use_default_keymappings = 1
-" au FileType scala nnoremap <localleader>df :EnDeclaration<CR>
-" au FileType scala nnoremap <localleader>t :EnTypeCheck<CR>
-" au         BufNewFile *.scala set fileformat=unix
-au BufRead,BufNewFile *.scala let b:comment_leader = '//'
-" au BufWritePost *.scala silent :EnTypeCheck
 
 " Python, PEP-008
 au BufRead,BufNewFile *.py,*.pyw set expandtab
