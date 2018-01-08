@@ -12,7 +12,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle
 " required!
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
+
 " original repos on github
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'

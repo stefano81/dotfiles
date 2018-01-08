@@ -51,7 +51,7 @@ HIST_STAMP="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes docker)
-plugins=(zsh_reload scala colored-man-pages docker)
+plugins=(zsh_reload scala colored-man-pages docker mvn gradle)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -139,7 +139,7 @@ if which pyenv-virtualenv-init > /dev/null; then
 fi
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
-export VIRTUALENVWRAPPER_PYTHON=$(which python)
+#export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 if [ -e "/usr/local/bin/virtualenvwrapper.sh" ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
@@ -162,3 +162,6 @@ source /usr/local/Bluemix/bx/zsh_autocomplete
 # tabtab source for jhipster package
 # uninstall by removing these lines or running `tabtab uninstall jhipster`
 #[[ -f /Users/stefano/.nvm/versions/node/v8.4.0/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zsh ]] && . /Users/stefano/.nvm/versions/node/v8.4.0/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zshexport
+
+# added by travis gem
+[ -f /Users/stefano/.travis/travis.sh ] && source /Users/stefano/.travis/travis.sh
