@@ -29,8 +29,8 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'bitc/vim-bad-whitespace'
 Plugin 'nathanaelkane/vim-indent-guides'
 " python
-Plugin 'python-mode/python-mode'
-Plugin 'jmcantrell/vim-virtualenv'
+"Plugin 'python-mode/python-mode'
+"Plugin 'jmcantrell/vim-virtualenv'
 " javascript
 " Plugin 'jelera/vim-javascript-syntax'
 Plugin 'mxw/vim-jsx'
@@ -48,7 +48,6 @@ Plugin 'othree/html5.vim'
 call vundle#end()            " required
 filetype plugin indent on     " required!
 
-"set guifont       = "Menlo:12"
 if has('gui_running')
   set background=dark
 else
@@ -107,8 +106,9 @@ let g:ycm_filetype_blacklist = {}
 " Syntastic
 let g:syntastic_javascript_checkers = ['standard']
 let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
+let g:syntastic_python_checkers = ['pyflakes', 'pylink']
 
-let g:synstatic_check_on_open=1
+"let g:synstatic_check_on_open=1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -149,7 +149,7 @@ set cursorline
 let mapleader = ","
 
 "Custom settings
-"set nofoldenable    " disable folding
+set nofoldenable    " disable folding
 
 
 " markdown
@@ -187,10 +187,10 @@ nnoremap <leader>v V`]
 
 " Buffers
 "nnoremap <leader>T :enew<cr>
-nnoremap gy :bnext<CR>
-nnoremap gt :bprevious<cr>
-nnoremap gd :bdelete<cr>
-nnoremap <leader>bl :ls<CR>
+"nnoremap gy :bnext<CR>
+"nnoremap gt :bprevious<cr>
+"nnoremap gd :bdelete<cr>
+"nnoremap <leader>bl :ls<CR>
 
 " Powerline
 set guifont=Inconsolata-g\ for\ Powerline:h11
@@ -282,6 +282,7 @@ au BufRead,BufNewFile *.py,*.pyw set autoindent
 au         BufNewFile *.py,*.pyw set fileformat=unix
 au BufRead,BufNewFile *.py,*.pyw let b:comment_leader = '#'
 let g:pymode_link_on_write = 0
+let g:pymode_python = 'python3'
 
 " JS, standard
 au BufRead,BufNewFile *.js set expandtab
