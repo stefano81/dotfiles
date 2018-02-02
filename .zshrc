@@ -5,7 +5,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="stefano"
 #ZSH_THEME="fox"
 #ZSH_THEME="kphoen" # my default
 #ZSH_THEME="agnoster"
@@ -51,7 +52,7 @@ HIST_STAMP="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes docker)
-plugins=(zsh_reload scala colored-man-pages docker mvn gradle)
+plugins=(osx zsh_reload colored-man-pages docker mvn gradle)
 
 source $ZSH/oh-my-zsh.sh
 
