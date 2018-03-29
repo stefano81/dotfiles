@@ -1,5 +1,5 @@
-set nocompatible
-filetype off
+set nocompatible  " be iMproved, required
+filetype off      " required
 
 set clipboard=unnamed
 
@@ -9,9 +9,8 @@ let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
 
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call vundle#begin() " required
 " let Vundle manage Vundle
-" required!
 Plugin 'VundleVim/Vundle.vim'
 
 " original repos on github
@@ -29,15 +28,18 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'bitc/vim-bad-whitespace'
 Plugin 'nathanaelkane/vim-indent-guides'
 " python
-"Plugin 'python-mode/python-mode'
+" Plugin 'python-mode/python-mode'
 "Plugin 'jmcantrell/vim-virtualenv'
 " javascript
 " Plugin 'jelera/vim-javascript-syntax'
 Plugin 'mxw/vim-jsx'
 " Plugin 'isRuslan/vim-es6'
 " Plugin 'Raimondi/delimitMate'
-" Plugin 'lervag/vimtex'
+Plugin 'lervag/vimtex'
 Plugin 'elzr/vim-json'
+
+" go
+Plugin 'fatih/vim-go'
 
 Plugin 'lilydjwg/colorizer'
 
@@ -45,8 +47,8 @@ Plugin 'lilydjwg/colorizer'
 Plugin 'othree/html5.vim'
 " vim-scripts repos
 " non github repos
-call vundle#end()            " required
-filetype plugin indent on     " required!
+call vundle#end()             " required
+filetype plugin indent on     " required
 
 if has('gui_running')
   set background=dark
@@ -57,9 +59,10 @@ endif
 
 set modelines=0
 syntax enable
-set nu
+set number
 set ruler
 set autochdir
+set virtualedit=block
 
 colorscheme solarized
 

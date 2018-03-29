@@ -52,7 +52,7 @@ HIST_STAMP="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes docker)
-plugins=(osx zsh_reload colored-man-pages docker mvn gradle)
+plugins=(zsh_reload colored-man-pages docker mvn gradle)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -94,7 +94,7 @@ setopt share_history
 setopt histignoredups
 
 # pip should only run if there is a virtualenv currently activated
-export PIP_REQUIRE_VIRTUALENV=true
+# export PIP_REQUIRE_VIRTUALENV=true
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -166,3 +166,7 @@ source /usr/local/Bluemix/bx/zsh_autocomplete
 
 # added by travis gem
 [ -f /Users/stefano/.travis/travis.sh ] && source /Users/stefano/.travis/travis.sh
+
+# go stuff
+export GOPATH=$(go env GOPATH)
+export PATH=$PATH:$GOPATH/bin
