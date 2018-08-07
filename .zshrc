@@ -52,7 +52,7 @@ HIST_STAMP="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes docker)
-plugins=(zsh_reload colored-man-pages docker mvn gradle)
+plugins=(zsh_reload colored-man-pages docker gradle)
 
 source $ZSH/oh-my-zsh.sh
 
