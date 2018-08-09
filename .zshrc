@@ -16,7 +16,7 @@ ZSH_THEME="stefano"
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
+# DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -52,7 +52,7 @@ HIST_STAMP="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes docker)
-plugins=(zsh_reload colored-man-pages docker gradle)
+plugins=(zsh_reload colored-man-pages docker gradle mvn vagrant)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -156,9 +156,6 @@ export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
 #$(brew info apache-spark | grep '*' | cut -f1 -d\ )/bin/load-spark-env.sh
 
-
-### Added by the Bluemix CLI
-source /usr/local/Bluemix/bx/zsh_autocomplete
 
 # tabtab source for jhipster package
 # uninstall by removing these lines or running `tabtab uninstall jhipster`
