@@ -121,6 +121,7 @@ let g:syntastic_aggregate_errors = 1
 " LaTeX
 let g:polyglot_disabled = ['latex']
 
+
 " Javascript
 autocmd BufWritePost *.js silent !standard --fix %
 let g:jsx_ext_required = 0
@@ -212,8 +213,8 @@ nnoremap <leader>d :NERDTreeToggle<CR>
 augroup file_types
   autocmd!
   autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-  autocmd BufRead,BufNewFile *.txt set filetype=markdown
+  autocmd BufRead,BufNewFile *.md set filetype=markdown setlocal spell spelllang=en_gb
+  autocmd BufRead,BufNewFile *.txt set filetype=markdown setlocal spell spelllang=en_gb
   autocmd BufRead,BufNewFile *.module set filetype=php
   autocmd BufRead,BufNewFile *.install set filetype=php
   autocmd BufRead,BufNewFile *.test set filetype=php
@@ -228,7 +229,7 @@ augroup file_types
   autocmd BufRead,BufNewFile *.twig set ft=htmldjango
   autocmd BufRead,BufNewFile *.rabl set ft=ruby
   autocmd BufRead,BufNewFile *.jade set ft=jade
-  autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex spelllang=en_US
+  autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex setlocal spell spelllang=en_gb
   autocmd BufRead,BufNewFile *.scala set filetype=scala
   autocmd BufRead,BufNewFile *.sbt set filetype=sbt.scala
 augroup END
@@ -237,14 +238,14 @@ augroup END
 " highlight ExtraWhitespace ctansiermbg=red guibg=red
 " match ExtraWhitespace /\s\+$/
 
-" augroup whitespace
-"     autocmd!
-"     autocmd BufWinEnter * match BadWhitespace /\s\+$/
-"     autocmd InsertEnter * match BadWhitespace /\s\+\%#\@<!$/
-"     autocmd InsertLeave * match BadWhitespace /\s\+$/
-"     autocmd BufRead,BufNewFile * match BadWhitespace /^\t\+/
-"     autocmd BufWinLeave * call clearmatches()
-" augroup END
+augroup whitespace
+    autocmd!
+    autocmd BufWinEnter * match BadWhitespace /\s\+$/
+    autocmd InsertEnter * match BadWhitespace /\s\+\%#\@<!$/
+    autocmd InsertLeave * match BadWhitespace /\s\+$/
+    autocmd BufRead,BufNewFile * match BadWhitespace /^\t\+/
+    autocmd BufWinLeave * call clearmatches()
+augroup END
 
 set undolevels=20
 set title
@@ -259,11 +260,6 @@ nnoremap ; :
 " vnoremap <leader>a= :Tabularize /=<CR>
 " nnoremap <leader>a: :Tabularize /:\zs<CR>
 " vnoremap <leader>a: :Tabularize /:\zs<CR>
-
-" Save
-noremap  <silent> <C-S> :update<CR>
-vnoremap <silent> <C-S> <C-C>:update<CR>
-inoremap <silent> <C-S> <C-O>:update<CR>
 
 " Abbreviations
 " iabbrev waht what
@@ -303,5 +299,4 @@ au BufRead,BufNewFile *.js let b:comment_leader = '//'
 augroup abbreviations
   autocmd!
   autocmd FileType html :iabbrev <buffer> --- &mdash;
-  autocmd FileType javascript :iabbrev <buffer> ret return
 augroup END
