@@ -32,6 +32,7 @@ Plugin 'nathanaelkane/vim-indent-guides'
 "Plugin 'jmcantrell/vim-virtualenv'
 " javascript
 " Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 " Plugin 'isRuslan/vim-es6'
 " Plugin 'Raimondi/delimitMate'
@@ -208,6 +209,7 @@ set fillchars+=stl:\ ,stlnc:\
 " Airline settings
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled =1
+let g:airline_theme='molokai'
 nnoremap <leader>d :NERDTreeToggle<CR>
 
 augroup file_types
