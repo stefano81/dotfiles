@@ -297,6 +297,10 @@ au BufRead,BufNewFile *.js set autoindent
 au         BufNewFile *.js set fileformat=unix
 au BufRead,BufNewFile *.js let b:comment_leader = '//'
 
+" Git commits Spell check and line wrap for git commit messages (from
+" vickylai/.vimrc)
+autocmd Filetype gitcommit setlocal spell textwidth=72
+
 " Abbreviations
 augroup abbreviations
   autocmd!
