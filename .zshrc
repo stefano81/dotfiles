@@ -134,6 +134,9 @@ autoload -Uz vcs_info
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
+#pyenv
+eval "$(pyenv init -)"
+
 # virtualenv
 if which pyenv-virtualenv-init > /dev/null; then
   eval "$(pyenv virtualenv-init -)"
@@ -167,3 +170,6 @@ export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 # go stuff
 export GOPATH=$(go env GOPATH)
 export PATH=$PATH:$GOPATH/bin
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/openssl/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include"

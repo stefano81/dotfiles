@@ -29,7 +29,6 @@ Plugin 'bitc/vim-bad-whitespace'
 Plugin 'nathanaelkane/vim-indent-guides'
 " python
 " Plugin 'python-mode/python-mode'
-"Plugin 'jmcantrell/vim-virtualenv'
 " javascript
 " Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
@@ -121,6 +120,7 @@ let g:syntastic_aggregate_errors = 1
 
 " LaTeX
 let g:polyglot_disabled = ['latex']
+let g:vimtex_disable_version_warning = 1
 
 
 " Javascript
@@ -231,7 +231,8 @@ augroup file_types
   autocmd BufRead,BufNewFile *.twig set ft=htmldjango
   autocmd BufRead,BufNewFile *.rabl set ft=ruby
   autocmd BufRead,BufNewFile *.jade set ft=jade
-  autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex setlocal spell spelllang=en_gb
+  " autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex setlocal spell spelllang=en_gb
+  autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex spell spelllang=en_gb
   autocmd BufRead,BufNewFile *.scala set filetype=scala
   autocmd BufRead,BufNewFile *.sbt set filetype=sbt.scala
 augroup END
