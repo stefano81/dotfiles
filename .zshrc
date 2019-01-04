@@ -97,11 +97,7 @@ setopt histignoredups
 # export PIP_REQUIRE_VIRTUALENV=true
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
 export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
@@ -137,17 +133,6 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 #pyenv
 eval "$(pyenv init -)"
 
-# virtualenv
-if which pyenv-virtualenv-init > /dev/null; then
-  eval "$(pyenv virtualenv-init -)"
-fi
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Projects
-#export VIRTUALENVWRAPPER_PYTHON=$(which python3)
-if [ -e "/usr/local/bin/virtualenvwrapper.sh" ]; then
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
-
 export TERM="xterm-256color"
 setopt interactivecomments
 
@@ -159,13 +144,9 @@ export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
 #$(brew info apache-spark | grep '*' | cut -f1 -d\ )/bin/load-spark-env.sh
 
-
 # tabtab source for jhipster package
 # uninstall by removing these lines or running `tabtab uninstall jhipster`
 #[[ -f /Users/stefano/.nvm/versions/node/v8.4.0/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zsh ]] && . /Users/stefano/.nvm/versions/node/v8.4.0/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zshexport
-
-# added by travis gem
-[ -f /Users/stefano/.travis/travis.sh ] && source /Users/stefano/.travis/travis.sh
 
 # go stuff
 export GOPATH=$(go env GOPATH)
