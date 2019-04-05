@@ -26,7 +26,8 @@ Plugin 'tpope/vim-sensible'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'bitc/vim-bad-whitespace'
-Plugin 'nathanaelkane/vim-indent-guides'
+"Plugin 'nathanaelkane/vim-indent-guides'
+"Plugin 'christoomey/vim-tmux-navigator'
 " python
 " Plugin 'python-mode/python-mode'
 " javascript
@@ -106,8 +107,13 @@ let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
 let g:ycm_show_diagnotics_ui = 0
 let g:ycm_filetype_blacklist = {}
 
+" Indent Guides
+let g:indent_guides_enable_on_vim_startup = 1
+
 " Syntastic
-let g:syntastic_javascript_checkers = ['standard']
+"let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
 " let g:syntastic_python_checkers = ['pyflakes', 'pylink']
 
@@ -124,7 +130,7 @@ let g:vimtex_disable_version_warning = 1
 
 
 " Javascript
-autocmd BufWritePost *.js silent !standard --fix %
+"autocmd BufWritePost *.js silent !standard --fix %
 let g:jsx_ext_required = 0
 " let g:jsx_pragma_required = 1
 

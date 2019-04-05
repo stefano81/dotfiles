@@ -52,7 +52,7 @@ HIST_STAMP="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes docker)
-plugins=(zsh_reload colored-man-pages docker gradle mvn vagrant)
+plugins=(zsh_reload colored-man-pages docker gradle mvn vagrant kubectl minikube)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,11 +112,12 @@ export ARCHFLAGS="-arch x86_64"
 #
 # nvm
 if [ -d "$HOME/.nvm" ]; then
-    export NVM_DIR=~/.nvm
+  export NVM_DIR="$HOME/.nvm"
     if [ -f "$NVM_DIR"/nvm.sh ]; then
       source ~/.nvm/nvm.sh
     elif [ -f "/usr/local/opt/nvm/nvm.sh" ]; then
-      source /usr/local/opt/nvm/nvm.sh
+      [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+      [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
     fi
 fi
 
@@ -139,10 +140,12 @@ setopt interactivecomments
 # added by travis gem
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
-export HADOOP_HOME=/usr/local/Cellar/hadoop/2.8.0/libexec
-export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+readonly HADOOP_HOME=/usr/local/Cellar/hadoop/3.1.1/libexec
+readonly HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
-#$(brew info apache-spark | grep '*' | cut -f1 -d\ )/bin/load-spark-env.sh
+# spark
+readonly SPARK_HOME=$(brew info apache-spark | grep '*' | cut -f1 -d\ )
+${SPARK_HOME}/bin/load-spark-env.sh
 
 # tabtab source for jhipster package
 # uninstall by removing these lines or running `tabtab uninstall jhipster`
