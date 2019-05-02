@@ -144,16 +144,19 @@ readonly HADOOP_HOME=/usr/local/Cellar/hadoop/3.1.1/libexec
 readonly HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
 # spark
-readonly SPARK_HOME=$(brew info apache-spark | grep '*' | cut -f1 -d\ )
-${SPARK_HOME}/bin/load-spark-env.sh
+# readonly SPARK_HOME=$(brew info apache-spark | grep '*' | cut -f1 -d\ )
+# ${SPARK_HOME}/bin/load-spark-env.sh
 
 # tabtab source for jhipster package
 # uninstall by removing these lines or running `tabtab uninstall jhipster`
 #[[ -f /Users/stefano/.nvm/versions/node/v8.4.0/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zsh ]] && . /Users/stefano/.nvm/versions/node/v8.4.0/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zshexport
 
 # go stuff
-export GOPATH=$(go env GOPATH)
+#export GOPATH=$(go env GOPATH)
 export PATH=$PATH:$GOPATH/bin
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/openssl/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl/include"
+
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
