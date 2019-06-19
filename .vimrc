@@ -221,8 +221,8 @@ nnoremap <leader>d :NERDTreeToggle<CR>
 augroup file_types
   autocmd!
   autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
-  autocmd BufRead,BufNewFile *.md set filetype=markdown setlocal spell spelllang=en_gb
-  autocmd BufRead,BufNewFile *.txt set filetype=markdown setlocal spell spelllang=en_gb
+  autocmd BufRead,BufNewFile *.md set filetype=markdown setlocal spell spelllang=en_us
+  autocmd BufRead,BufNewFile *.txt set filetype=plain setlocal spell spelllang=en_us
   autocmd BufRead,BufNewFile *.module set filetype=php
   autocmd BufRead,BufNewFile *.install set filetype=php
   autocmd BufRead,BufNewFile *.test set filetype=php
@@ -238,7 +238,7 @@ augroup file_types
   autocmd BufRead,BufNewFile *.rabl set ft=ruby
   autocmd BufRead,BufNewFile *.jade set ft=jade
   " autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex setlocal spell spelllang=en_gb
-  autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex spell spelllang=en_gb
+  autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex spell spelllang=en_us
   autocmd BufRead,BufNewFile *.scala set filetype=scala
   autocmd BufRead,BufNewFile *.sbt set filetype=sbt.scala
 augroup END

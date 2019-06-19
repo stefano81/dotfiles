@@ -6,9 +6,9 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="stefano"
+#ZSH_THEME="stefano"
 #ZSH_THEME="fox"
-#ZSH_THEME="kphoen" # my default
+ZSH_THEME="kphoen" # my default
 #ZSH_THEME="agnoster"
 #ZSH_THEME="rkj-repos" # not bad
 #ZSH_THEME="random"
@@ -61,7 +61,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
 
 if [ "$(uname -s)" = "Darwin" ]; then
-    export JAVA_HOME=$(/usr/libexec/java_home)
+    export JAVA_HOME=$(/usr/libexec/java_home -v 11)
     export PATH=$JAVA_HOME:$PATH
 fi
 
