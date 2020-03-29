@@ -16,7 +16,7 @@ ZSH_THEME="kphoen" # my default
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -52,7 +52,7 @@ HIST_STAMP="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes docker)
-plugins=(zsh_reload colored-man-pages docker gradle mvn vagrant kubectl minikube)
+plugins=(zsh_reload docker gradle mvn kubectl minikube)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -61,7 +61,8 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
 
 if [ "$(uname -s)" = "Darwin" ]; then
-    export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+    export JAVA_HOME=$(/usr/libexec/java_home -v 14)
+    # export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
     export PATH=$JAVA_HOME:$PATH
 fi
 
@@ -73,7 +74,6 @@ fi
 if [ -d "$ANDROID_HOME" ]; then
     export PATH="$PATH:$ANDROID_HOME/sdk/tools:$ANDROID_HOME/platform-tools"
 fi
-
 
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -92,6 +92,7 @@ export LANG=en_US.utf-8
 setopt inc_append_history
 setopt share_history
 setopt histignoredups
+setopt interactivecomments
 
 # pip should only run if there is a virtualenv currently activated
 # export PIP_REQUIRE_VIRTUALENV=true
@@ -135,13 +136,12 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 eval "$(pyenv init -)"
 
 export TERM="xterm-256color"
-setopt interactivecomments
 
 # added by travis gem
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
-readonly HADOOP_HOME=/usr/local/Cellar/hadoop/3.1.1/libexec
-readonly HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export HADOOP_HOME=/usr/local/Cellar/hadoop/3.2.1/libexec
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
 # spark
 # readonly SPARK_HOME=$(brew info apache-spark | grep '*' | cut -f1 -d\ )
@@ -152,8 +152,8 @@ readonly HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 #[[ -f /Users/stefano/.nvm/versions/node/v8.4.0/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zsh ]] && . /Users/stefano/.nvm/versions/node/v8.4.0/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zshexport
 
 # go stuff
-#export GOPATH=$(go env GOPATH)
-export PATH=$PATH:$GOPATH/bin
+# export GOPATH=$(go env GOPATH)
+# export PATH=$PATH:$GOPATH/bin
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/openssl/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl/include"

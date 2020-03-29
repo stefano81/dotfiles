@@ -20,7 +20,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'kien/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-sensible'
 Plugin 'vim-syntastic/syntastic'
@@ -41,11 +41,19 @@ Plugin 'elzr/vim-json'
 
 " go
 Plugin 'fatih/vim-go'
-
+"
 Plugin 'lilydjwg/colorizer'
-
 "
 Plugin 'othree/html5.vim'
+"
+" Markdown
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+"
+" Rust
+Plugin 'rust-lang/rust.vim'
+
+
 " vim-scripts repos
 " non github repos
 call vundle#end()             " required
@@ -218,11 +226,20 @@ let g:airline#extensions#tabline#enabled =1
 let g:airline_theme='molokai'
 nnoremap <leader>d :NERDTreeToggle<CR>
 
+" augroup whitespace
+"     autocmd!
+"     autocmd BufWinEnter * match BadWhitespace /\s\+$/
+"     autocmd InsertEnter * match BadWhitespace /\s\+\%#\@<!$/
+"     autocmd InsertLeave * match BadWhitespace /\s\+$/
+"     autocmd BufRead,BufNewFile * match BadWhitespace /^\t\+/
+"     autocmd BufWinLeave * call clearmatches()
+" augroup END
+
 augroup file_types
   autocmd!
   autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
-  autocmd BufRead,BufNewFile *.md set filetype=markdown setlocal spell spelllang=en_us
-  autocmd BufRead,BufNewFile *.txt set filetype=plain setlocal spell spelllang=en_us
+  autocmd BufRead,BufNewFile *.md setlocal filetype=markdown spell spelllang=en_us
+  autocmd BufRead,BufNewFile *.txt setlocal filetype=plain spell spelllang=en_us
   autocmd BufRead,BufNewFile *.module set filetype=php
   autocmd BufRead,BufNewFile *.install set filetype=php
   autocmd BufRead,BufNewFile *.test set filetype=php
@@ -237,8 +254,7 @@ augroup file_types
   autocmd BufRead,BufNewFile *.twig set ft=htmldjango
   autocmd BufRead,BufNewFile *.rabl set ft=ruby
   autocmd BufRead,BufNewFile *.jade set ft=jade
-  " autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex setlocal spell spelllang=en_gb
-  autocmd BufRead,BufNewFile *.tex set filetype=tex syntax=tex spell spelllang=en_us
+  autocmd BufRead,BufNewFile *.tex setlocal filetype=tex syntax=tex spell spelllang=en_us
   autocmd BufRead,BufNewFile *.scala set filetype=scala
   autocmd BufRead,BufNewFile *.sbt set filetype=sbt.scala
 augroup END
@@ -246,15 +262,6 @@ augroup END
 " Whitespace fixes
 " highlight ExtraWhitespace ctansiermbg=red guibg=red
 " match ExtraWhitespace /\s\+$/
-
-augroup whitespace
-    autocmd!
-    autocmd BufWinEnter * match BadWhitespace /\s\+$/
-    autocmd InsertEnter * match BadWhitespace /\s\+\%#\@<!$/
-    autocmd InsertLeave * match BadWhitespace /\s\+$/
-    autocmd BufRead,BufNewFile * match BadWhitespace /^\t\+/
-    autocmd BufWinLeave * call clearmatches()
-augroup END
 
 set undolevels=20
 set title
