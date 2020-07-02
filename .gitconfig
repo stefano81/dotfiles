@@ -9,6 +9,7 @@
 [core]
 	excludesfile = /home/stefanob/.gitignore
 	autocrlf = input
+	precomposeUnicode = true
 [push]
         default = matching
 [credential]
