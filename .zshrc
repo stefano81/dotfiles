@@ -61,7 +61,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
 
 if [ "$(uname -s)" = "Darwin" ]; then
-    export JAVA_HOME=$(/usr/libexec/java_home -v 14)
+    export JAVA_HOME=$(/usr/libexec/java_home -v 11)
     # export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
     export PATH=$JAVA_HOME:$PATH
 fi
@@ -159,4 +159,4 @@ export LDFLAGS="-L/usr/local/opt/openssl/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl/include"
 
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
-
+export PATH="/usr/local/lib/ruby/gems/$(ruby --version | cut -f2 -d\ |cut -f1,2 -d.).0/bin:$PATH"
