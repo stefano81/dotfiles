@@ -61,10 +61,12 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
 
 if [ "$(uname -s)" = "Darwin" ]; then
-    export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+    #export JAVA_HOME=$(/usr/libexec/java_home -v 11)
     # export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-    export PATH=$JAVA_HOME:$PATH
+    # export PATH=$JAVA_HOME:$PATH
 fi
+
+eval "$(jenv init -)"
 
 # android
 #export ANDROID_HOME="$HOME/adt-bundle-linux-x86_64-20131030"
