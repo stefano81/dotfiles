@@ -60,6 +60,10 @@ source $ZSH/oh-my-zsh.sh
 # for brew
 export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
 
+if [ which cargo > /dev/null ]; then
+  export PATH="$PATH:$HOME/.cargo/bin"
+fi
+
 if [ "$(uname -s)" = "Darwin" ]; then
     #export JAVA_HOME=$(/usr/libexec/java_home -v 11)
     # export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
