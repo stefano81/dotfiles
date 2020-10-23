@@ -135,6 +135,7 @@ let g:syntastic_aggregate_errors = 1
 " LaTeX
 let g:polyglot_disabled = ['latex']
 let g:vimtex_disable_version_warning = 1
+let g:tex_flavor = 'latex'
 
 
 " Javascript
