@@ -21,3 +21,5 @@
 	required = true
 [commit]
 	template = /Users/stefano/.gitmessage
+[init]
+	defaultBranch = master

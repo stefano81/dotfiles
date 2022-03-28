@@ -8,55 +8,104 @@ set t_Co=256
 let &t_AB="\e[48;5;%dm"
 let &t_AF="\e[38;5;%dm"
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin() " required
-" let Vundle manage Vundle
-Plugin 'VundleVim/Vundle.vim'
+" LaTeX
+let g:polyglot_disabled = ['latex']
+let g:vimtex_disable_version_warning = 1
+let g:tex_flavor = 'latex'
 
+call plug#begin('~/.vim/plugged')
 " original repos on github
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'kien/ctrlp.vim'
-Plugin 'ycm-core/YouCompleteMe'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-sensible'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'bitc/vim-bad-whitespace'
-"Plugin 'nathanaelkane/vim-indent-guides'
-"Plugin 'christoomey/vim-tmux-navigator'
+Plug 'scrooloose/nerdtree'
+Plug 'majutsushi/tagbar'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'kien/ctrlp.vim'
+"Plug 'ycm-core/YouCompleteMe'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'vim-syntastic/syntastic'
+Plug 'sheerun/vim-polyglot'
+Plug 'bitc/vim-bad-whitespace'
+"Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'christoomey/vim-tmux-navigator'
 " python
-" Plugin 'python-mode/python-mode'
+" Plug 'python-mode/python-mode'
 " javascript
-" Plugin 'jelera/vim-javascript-syntax'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-" Plugin 'isRuslan/vim-es6'
-" Plugin 'Raimondi/delimitMate'
-Plugin 'lervag/vimtex'
-Plugin 'elzr/vim-json'
+" Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+" Plug 'isRuslan/vim-es6'
+" Plug 'Raimondi/delimitMate'
+Plug 'lervag/vimtex'
+Plug 'elzr/vim-json'
 
 " go
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 "
-Plugin 'lilydjwg/colorizer'
+Plug 'lilydjwg/colorizer'
 "
-Plugin 'othree/html5.vim'
+Plug 'othree/html5.vim'
 "
 " Markdown
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 "
 " Rust
-Plugin 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
+call plug#end()
 
-
-" vim-scripts repos
-" non github repos
-call vundle#end()             " required
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin() " required
+" " let Vundle manage Vundle
+" Plugin 'VundleVim/Vundle.vim'
+"
+" " original repos on github
+" Plugin 'scrooloose/nerdtree'
+" Plugin 'majutsushi/tagbar'
+" Plugin 'altercation/vim-colors-solarized'
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'kien/ctrlp.vim'
+" "Plugin 'ycm-core/YouCompleteMe'
+" Plugin "
+" Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-sensible'
+" Plugin 'vim-syntastic/syntastic'
+" Plugin 'sheerun/vim-polyglot'
+" Plugin 'bitc/vim-bad-whitespace'
+" "Plugin 'nathanaelkane/vim-indent-guides'
+" "Plugin 'christoomey/vim-tmux-navigator'
+" " python
+" " Plugin 'python-mode/python-mode'
+" " javascript
+" " Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'mxw/vim-jsx'
+" " Plugin 'isRuslan/vim-es6'
+" " Plugin 'Raimondi/delimitMate'
+" Plugin 'lervag/vimtex'
+" Plugin 'elzr/vim-json'
+"
+" " go
+" Plugin 'fatih/vim-go'
+" "
+" Plugin 'lilydjwg/colorizer'
+" "
+" Plugin 'othree/html5.vim'
+" "
+" " Markdown
+" Plugin 'godlygeek/tabular'
+" Plugin 'plasticboy/vim-markdown'
+" "
+" " Rust
+" Plugin 'rust-lang/rust.vim'
+"
+"
+" " vim-scripts repos
+" " non github repos
+" call vundle#end()             " required
 filetype plugin indent on     " required
 
 if has('gui_running')
@@ -100,20 +149,24 @@ let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard']  " Windows
 
-" YCM
-" let g:ycm_add_preview_to_completeopt=0
-" let g:ycm_confirm_extra_conf=0
-" set completeopt-=preview
-let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
-let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
-let g:ycm_complete_in_comments = 1 " Completion in comments
-let g:ycm_complete_in_strings = 1 " Completion in string
+" " YCM
+" " let g:ycm_add_preview_to_completeopt=0
+" " let g:ycm_confirm_extra_conf=0
+" " set completeopt-=preview
+" let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+" let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+" let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+" let g:ycm_complete_in_comments = 1 " Completion in comments
+" let g:ycm_complete_in_strings = 1 " Completion in string
+"
+" let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+" let g:ycm_show_diagnotics_ui = 0
+" let g:ycm_filetype_blacklist = {}
 
-let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-let g:ycm_show_diagnotics_ui = 0
-let g:ycm_filetype_blacklist = {}
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "passive_filetypes": ["python", "rust"] }
 
 " Indent Guides
 let g:indent_guides_enable_on_vim_startup = 1
@@ -123,7 +176,8 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 let g:syntastic_tex_checkers = ['lacheck', 'text/language_check']
-" let g:syntastic_python_checkers = ['pyflakes', 'pylink']
+let g:syntastic_python_checkers = ['pyflakes', 'pylink']
+let g:syntastic_python_checkers = ['pylint']
 
 "let g:synstatic_check_on_open=1
 let g:syntastic_always_populate_loc_list = 1
@@ -131,12 +185,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
-
-" LaTeX
-let g:polyglot_disabled = ['latex']
-let g:vimtex_disable_version_warning = 1
-let g:tex_flavor = 'latex'
-
 
 " Javascript
 "autocmd BufWritePost *.js silent !standard --fix %
@@ -316,8 +364,10 @@ au BufRead,BufNewFile *.js let b:comment_leader = '//'
 " vickylai/.vimrc)
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
+" YAML
+autocmd Filetype yaml setlocal ts=2 sts=2 sw=2 expandtab
+
 " Abbreviations
 augroup abbreviations
   autocmd!
-  autocmd FileType html :iabbrev <buffer> --- &mdash;
-augroup END
+  autocmd FileType html :iabbrev <buffer> --- &mdash;, "rust"oaugroup END

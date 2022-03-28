@@ -52,17 +52,13 @@ HIST_STAMP="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes docker)
-plugins=(zsh_reload docker gradle mvn kubectl minikube)
+plugins=(colored-man-pages gradle)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 # for brew
 export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
-
-if [ which cargo > /dev/null ]; then
-  export PATH="$PATH:$HOME/.cargo/bin"
-fi
 
 if [ "$(uname -s)" = "Darwin" ]; then
     #export JAVA_HOME=$(/usr/libexec/java_home -v 11)
@@ -72,20 +68,7 @@ fi
 
 eval "$(jenv init -)"
 
-# android
-#export ANDROID_HOME="$HOME/adt-bundle-linux-x86_64-20131030"
-if [ -d '/usr/local/opt/android-sdk' ]; then
-    export ANDROID_HOME=/usr/local/opt/android-sdk
-fi
-if [ -d "$ANDROID_HOME" ]; then
-    export PATH="$PATH:$ANDROID_HOME/sdk/tools:$ANDROID_HOME/platform-tools"
-fi
-
 export MANPATH="/usr/local/man:$MANPATH"
-
-if [ -d "$HOME/Utilities/sbt" ]; then
-    export PATH="$PATH:$HOME/Utilities/sbt/bin"
-fi
 
 if [ -d "/Library/TeX/texbin" -o ]; then
     # El Capitan trick..
@@ -99,9 +82,6 @@ setopt inc_append_history
 setopt share_history
 setopt histignoredups
 setopt interactivecomments
-
-# pip should only run if there is a virtualenv currently activated
-# export PIP_REQUIRE_VIRTUALENV=true
 
 # Preferred editor for local and remote sessions
 export EDITOR='vim'
@@ -139,30 +119,34 @@ autoload -Uz vcs_info
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 #pyenv
-eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init --path)"
 
 export TERM="xterm-256color"
 
 # added by travis gem
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
-export HADOOP_HOME=/usr/local/Cellar/hadoop/3.2.1/libexec
-export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+#export HADOOP_HOME=/usr/local/Cellar/hadoop/3.2.1/libexec
+#export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
 # spark
 # readonly SPARK_HOME=$(brew info apache-spark | grep '*' | cut -f1 -d\ )
 # ${SPARK_HOME}/bin/load-spark-env.sh
 
-# tabtab source for jhipster package
-# uninstall by removing these lines or running `tabtab uninstall jhipster`
-#[[ -f /Users/stefano/.nvm/versions/node/v8.4.0/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zsh ]] && . /Users/stefano/.nvm/versions/node/v8.4.0/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zshexport
-
 # go stuff
 # export GOPATH=$(go env GOPATH)
 # export PATH=$PATH:$GOPATH/bin
 export PATH="/usr/local/opt/openssl/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/openssl/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl/include"
+export LDFLAGS="-L/usr/local/opt/openssl/lib -L/usr/local/opt/sqlite/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/sqlite/include"
 
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
-export PATH="/usr/local/lib/ruby/gems/$(ruby --version | cut -f2 -d\ |cut -f1,2 -d.).0/bin:$PATH"
+export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/$(ruby --version | cut -f2 -d\ | cut -f1,2 -d.)/bin:$PATH"
+
+export PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig"
+
+if [ -e "$HOME/.cargo/env" ]; then
+  source $HOME/.cargo/env
+fi
