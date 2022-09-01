@@ -51,8 +51,18 @@ HIST_STAMP="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+#
 #plugins=(zsh_reload scala sbt mvn colored-man-pages brew vim themes docker)
-plugins=(colored-man-pages gradle)
+
+# to enable vscode plugin
+VSCODE="code"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+
+plugins=(colored-man-pages gradle brew docker vscode jenv kubectl pyenv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -60,13 +70,13 @@ source $ZSH/oh-my-zsh.sh
 # for brew
 export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
 
+alias ibrew='arch -x86_64 brew'
+
 if [ "$(uname -s)" = "Darwin" ]; then
     #export JAVA_HOME=$(/usr/libexec/java_home -v 11)
     # export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
     # export PATH=$JAVA_HOME:$PATH
 fi
-
-eval "$(jenv init -)"
 
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -96,6 +106,7 @@ export ARCHFLAGS="-arch x86_64"
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
+# alias docker=podman
 #
 # nvm
 if [ -d "$HOME/.nvm" ]; then
@@ -116,12 +127,7 @@ fi
 autoload -U zmv
 autoload -Uz vcs_info
 
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-
-#pyenv
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init --path)"
+# export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 export TERM="xterm-256color"
 
@@ -139,8 +145,9 @@ export TERM="xterm-256color"
 # export GOPATH=$(go env GOPATH)
 # export PATH=$PATH:$GOPATH/bin
 export PATH="/usr/local/opt/openssl/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/openssl/lib -L/usr/local/opt/sqlite/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/sqlite/include"
+
+export LDFLAGS="-L/usr/local/opt/openssl/lib -L/usr/local/opt/sqlite/lib -L/opt/homebrew/opt/libpq/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/sqlite/include -I/opt/homebrew/opt/libpq/include"
 
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/$(ruby --version | cut -f2 -d\ | cut -f1,2 -d.)/bin:$PATH"
@@ -150,3 +157,23 @@ export PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig"
 if [ -e "$HOME/.cargo/env" ]; then
   source $HOME/.cargo/env
 fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/stefano/.pyenv/versions/miniconda3-latest/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/stefano/.pyenv/versions/miniconda3-latest/etc/profile.d/conda.sh" ]; then
+        . "/Users/stefano/.pyenv/versions/miniconda3-latest/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/stefano/.pyenv/versions/miniconda3-latest/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
