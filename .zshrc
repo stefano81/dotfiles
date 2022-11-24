@@ -58,19 +58,18 @@ HIST_STAMP="yyyy-mm-dd"
 VSCODE="code"
 
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init --path)"
 
-plugins=(colored-man-pages gradle brew docker vscode jenv kubectl pyenv)
+#plugins=(colored-man-pages gradle brew docker vscode jenv kubectl pyenv)
+plugins=(colored-man-pages gradle brew docker vscode kubectl python helm)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 # for brew
-export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
-
-alias ibrew='arch -x86_64 brew'
+#export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
 
 if [ "$(uname -s)" = "Darwin" ]; then
     #export JAVA_HOME=$(/usr/libexec/java_home -v 11)
@@ -144,36 +143,37 @@ export TERM="xterm-256color"
 # go stuff
 # export GOPATH=$(go env GOPATH)
 # export PATH=$PATH:$GOPATH/bin
-export PATH="/usr/local/opt/openssl/bin:$PATH"
+#export PATH="/usr/local/opt/openssl/bin:$PATH"
 
-export LDFLAGS="-L/usr/local/opt/openssl/lib -L/usr/local/opt/sqlite/lib -L/opt/homebrew/opt/libpq/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/sqlite/include -I/opt/homebrew/opt/libpq/include"
+#export LDFLAGS="-L/usr/local/opt/openssl/lib -L/usr/local/opt/sqlite/lib -L/opt/homebrew/opt/libpq/lib"
+#export CPPFLAGS="-I/usr/local/opt/openssl/include -I/usr/local/opt/sqlite/include -I/opt/homebrew/opt/libpq/include"
 
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/$(ruby --version | cut -f2 -d\ | cut -f1,2 -d.)/bin:$PATH"
+#export PATH="/usr/local/opt/sqlite/bin:$PATH"
+#export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/$(ruby --version | cut -f2 -d\ | cut -f1,2 -d.)/bin:$PATH"
 
-export PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig"
+#export PKG_CONFIG_PATH="/usr/local/opt/sqlite/lib/pkgconfig"
 
 if [ -e "$HOME/.cargo/env" ]; then
   source $HOME/.cargo/env
 fi
 
+#export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+#export PATH="/opt/homebrew/bin:$PATH"
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/stefano/.pyenv/versions/miniconda3-latest/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/stefano/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/stefano/.pyenv/versions/miniconda3-latest/etc/profile.d/conda.sh" ]; then
-        . "/Users/stefano/.pyenv/versions/miniconda3-latest/etc/profile.d/conda.sh"
+    if [ -f "/Users/stefano/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/stefano/opt/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/stefano/.pyenv/versions/miniconda3-latest/bin:$PATH"
+        export PATH="/Users/stefano/opt/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
